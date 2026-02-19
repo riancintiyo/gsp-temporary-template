@@ -44,6 +44,7 @@ body {
         0 0 0 1px rgba(255, 255, 255, 0.08),
         /* Subtle border */ 0 20px 40px rgba(0, 0, 0, 0.4); /* Deep shadow */
     position: relative;
+    z-index: 10;
     overflow: hidden;
 }
 
@@ -304,4 +305,128 @@ body {
 
 .footer-cta:focus-visible {
     box-shadow: 0 0 0 4px rgba(52,211,153,0.12);
+}
+
+/* --- 7. Chrome Dino Runner Scene --- */
+.dino-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+    overflow: hidden;
+}
+
+.dino-scene.active {
+    opacity: 1;
+}
+
+/* Shared sprite styling */
+.dino-sprite {
+    position: absolute;
+    background-image: url('./asset/default_100_percent/100-offline-sprite.png');
+    background-repeat: no-repeat;
+    background-size: 1233px 68px;
+    image-rendering: pixelated;
+    filter: invert(1) opacity(0.3);
+    animation-fill-mode: backwards;
+}
+
+/* Ground — repeating scrolling horizon */
+.dino-ground-wrap {
+    position: absolute;
+    bottom: 12%;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    overflow: hidden;
+}
+
+.dino-ground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 600px);
+    height: 12px;
+    background: url('./asset/default_100_percent/100-offline-sprite.png') repeat-x -2px -54px / 1233px 68px;
+    image-rendering: pixelated;
+    filter: invert(1) opacity(0.12);
+    animation: ground-scroll 4s linear infinite;
+}
+
+@keyframes ground-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-600px); }
+}
+
+/* T-Rex running */
+.dino-runner {
+    bottom: calc(12% + 10px);
+    left: 0;
+    width: 44px;
+    height: 47px;
+    animation:
+        dino-run-sprite 0.15s steps(1) infinite,
+        dino-traverse 8s linear infinite;
+}
+
+@keyframes dino-run-sprite {
+    0%, 49.9% { background-position: -936px -2px; }
+    50%, 100% { background-position: -980px -2px; }
+}
+
+@keyframes dino-traverse {
+    from { transform: translateX(-60px); }
+    to { transform: translateX(100vw); }
+}
+
+/* Pterodactyl */
+.dino-ptero {
+    bottom: calc(12% + 60px);
+    left: 0;
+    width: 46px;
+    height: 40px;
+    animation:
+        ptero-flap 0.25s steps(1) infinite,
+        drift-left 7s linear infinite;
+}
+
+@keyframes ptero-flap {
+    0%, 49.9% { background-position: -134px -2px; }
+    50%, 100% { background-position: -180px -2px; }
+}
+
+@keyframes drift-left {
+    from { transform: translateX(calc(100vw + 60px)); }
+    to { transform: translateX(-120px); }
+}
+
+/* Cactus (small) */
+.dino-cactus-sm {
+    bottom: calc(12% + 10px);
+    left: 0;
+    width: 17px;
+    height: 35px;
+    background-position: -228px -2px;
+    animation: drift-left 9s linear infinite;
+}
+
+/* Cactus (large) */
+.dino-cactus-lg {
+    bottom: calc(12% + 10px);
+    left: 0;
+    width: 25px;
+    height: 50px;
+    background-position: -332px -2px;
+    animation: drift-left 11s linear infinite;
+}
+
+/* Cloud */
+.dino-cloud {
+    width: 46px;
+    height: 14px;
+    background-position: -86px -2px;
+    filter: invert(1) opacity(0.06);
+    animation: drift-left 22s linear infinite;
 }
