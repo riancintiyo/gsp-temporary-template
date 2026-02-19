@@ -81,6 +81,41 @@
         </div>
 
         <div class="card">
+            <!-- Card Top Bar -->
+            <div class="card-topbar">
+                <button class="nav-btn" id="themeToggle" type="button" aria-label="Toggle theme">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <div class="menu-wrapper">
+                    <button class="nav-btn" id="menuBtn" aria-label="Menu">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="5" cy="12" r="1"></circle>
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                        </svg>
+                    </button>
+                    <div class="popup-menu" id="popupMenu">
+                        <a href="mailto:riancintiyo@generalscienceprogram.com" class="popup-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <span>Contact Developer</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Header -->
             <div class="header">
                 <div class="header-content">
@@ -92,32 +127,6 @@
                     <div class="text-group">
                         <h2>General Science Program</h2>
                         <p>We're in the middle of cooking a fresh update — new STEM &amp; STEAM projects and hands-on experiments. Come back soon to taste what we've been making!🍥</p>
-                    </div>
-                </div>
-                <div class="menu-wrapper">
-                    <button class="menu-dots" id="menuBtn" aria-label="Menu">...</button>
-                    <div class="popup-menu" id="popupMenu">
-                        <button class="popup-item" id="themeToggle" type="button">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="5"></circle>
-                                <line x1="12" y1="1" x2="12" y2="3"></line>
-                                <line x1="12" y1="21" x2="12" y2="23"></line>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                <line x1="1" y1="12" x2="3" y2="12"></line>
-                                <line x1="21" y1="12" x2="23" y2="12"></line>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                            </svg>
-                            <span>Light Mode</span>
-                        </button>
-                        <a href="mailto:riancintiyo@generalscienceprogram.com" class="popup-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                            <span>Contact Developer</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -212,7 +221,6 @@
             themeToggle.addEventListener("click", () => {
                 document.body.classList.toggle("light-theme");
                 const isLight = document.body.classList.contains("light-theme");
-                themeToggle.querySelector("span").textContent = isLight ? "Dark Mode" : "Light Mode";
                 // Swap the icon to moon when in light mode
                 themeToggle.querySelector("svg").innerHTML = isLight
                     ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>'
@@ -288,7 +296,7 @@
 
                 runCycle();
                 setInterval(runCycle, 11000); // cycle = 5.5s ptero delay + 4s crossing + 1.5s breathing room
-            }, 2000);
+            }, 1500);
         </script>
     </body>
 </html>

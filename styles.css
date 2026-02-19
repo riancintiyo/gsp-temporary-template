@@ -19,10 +19,48 @@ body {
     background-size: 20px 20px;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 16px;
     color: #ffffff;
+}
+
+/* --- Card Top Bar --- */
+.card-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2px;
+    margin: -8px -8px 12px -8px;
+}
+
+.nav-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    color: #999;
+}
+
+.nav-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: #999;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn:hover svg {
+    stroke: #ccc;
 }
 
 /* --- 2. Main Card Container --- */
@@ -37,13 +75,11 @@ body {
         /* Subtle border */ 0 20px 40px rgba(0, 0, 0, 0.4); /* Deep shadow */
     position: relative;
     z-index: 10;
-    overflow: hidden;
 }
 
 /* --- 3. Header Section --- */
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 28px;
 }
@@ -51,11 +87,6 @@ body {
 .header-content {
     display: flex;
     gap: 16px;
-}
-
-.text-group {
-    flex: 1;
-    min-width: 0; /* allow flex item to shrink and wrap text properly */
 }
 
 /* Icon Container with subtle 3D styling */
@@ -91,6 +122,11 @@ body {
     display: block;
 }
 
+.text-group {
+    flex: 1;
+    min-width: 0;
+}
+
 .text-group h2 {
     font-size: 17px;
     font-weight: 600;
@@ -107,25 +143,6 @@ body {
 
 .menu-wrapper {
     position: relative;
-}
-
-.menu-dots {
-    color: #666;
-    font-size: 20px;
-    cursor: pointer;
-    line-height: 0.5;
-    background: none;
-    border: none;
-    padding: 8px;
-    border-radius: 8px;
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-.menu-dots:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #aaa;
 }
 
 /* --- Popup Menu --- */
@@ -346,6 +363,22 @@ body.light-theme .menu-dots {
 body.light-theme .menu-dots:hover {
     background: rgba(0, 0, 0, 0.06);
     color: #555;
+}
+
+body.light-theme .nav-btn {
+    color: #666;
+}
+
+body.light-theme .nav-btn svg {
+    stroke: #666;
+}
+
+body.light-theme .nav-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .nav-btn:hover svg {
+    stroke: #333;
 }
 
 body.light-theme .popup-menu {
