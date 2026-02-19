@@ -336,7 +336,7 @@ body {
 /* Ground — repeating scrolling horizon */
 .dino-ground-wrap {
     position: absolute;
-    bottom: 12%;
+    bottom: 4%;
     left: 0;
     width: 100%;
     height: 12px;
@@ -360,36 +360,63 @@ body {
     to { transform: translateX(-600px); }
 }
 
-/* T-Rex running */
+/* T-Rex running in place at fixed position */
 .dino-runner {
-    bottom: calc(12% + 10px);
-    left: 0;
+    bottom: calc(4% + 10px);
+    left: 10%;
     width: 44px;
     height: 47px;
-    animation:
-        dino-run-sprite 0.15s steps(1) infinite,
-        dino-traverse 8s linear infinite;
+    animation: dino-run-sprite 0.15s steps(1) infinite;
 }
 
+/* Running frames */
 @keyframes dino-run-sprite {
     0%, 49.9% { background-position: -936px -2px; }
     50%, 100% { background-position: -980px -2px; }
 }
 
-@keyframes dino-traverse {
-    from { transform: translateX(-60px); }
-    to { transform: translateX(100vw); }
+/* Jump — override running with a vertical hop */
+.dino-runner.jump {
+    animation:
+        dino-jump 0.55s ease-out forwards;
+    background-position: -848px -2px; /* standing frame while airborne */
+}
+
+@keyframes dino-jump {
+    0%   { transform: translateY(0); }
+    35%  { transform: translateY(-55px); }
+    65%  { transform: translateY(-55px); }
+    100% { transform: translateY(0); }
+}
+
+/* Duck — shorter & wider sprite, shift bottom so feet stay on ground */
+.dino-runner.duck {
+    width: 59px;
+    height: 27px;
+    bottom: calc(4% + 10px);
+    animation: dino-duck-sprite 0.15s steps(1) infinite;
+}
+
+@keyframes dino-duck-sprite {
+    0%, 49.9% { background-position: -1112px -20px; }
+    50%, 100% { background-position: -1171px -20px; }
+}
+
+/* Obstacles — single-pass crossing from right to left */
+@keyframes obstacle-pass {
+    from { transform: translateX(calc(100vw + 60px)); }
+    to   { transform: translateX(-120px); }
 }
 
 /* Pterodactyl */
 .dino-ptero {
-    bottom: calc(12% + 60px);
+    bottom: calc(4% + 40px);
     left: 0;
     width: 46px;
     height: 40px;
     animation:
         ptero-flap 0.25s steps(1) infinite,
-        drift-left 7s linear infinite;
+        obstacle-pass 4s linear forwards;
 }
 
 @keyframes ptero-flap {
@@ -397,29 +424,14 @@ body {
     50%, 100% { background-position: -180px -2px; }
 }
 
-@keyframes drift-left {
-    from { transform: translateX(calc(100vw + 60px)); }
-    to { transform: translateX(-120px); }
-}
-
-/* Cactus (small) */
-.dino-cactus-sm {
-    bottom: calc(12% + 10px);
-    left: 0;
-    width: 17px;
-    height: 35px;
-    background-position: -228px -2px;
-    animation: drift-left 9s linear infinite;
-}
-
-/* Cactus (large) */
+/* Cactus (large — the only one we spawn now) */
 .dino-cactus-lg {
-    bottom: calc(12% + 10px);
+    bottom: calc(4% + 10px);
     left: 0;
     width: 25px;
     height: 50px;
     background-position: -332px -2px;
-    animation: drift-left 11s linear infinite;
+    animation: obstacle-pass 4s linear forwards;
 }
 
 /* Cloud */
@@ -429,4 +441,9 @@ body {
     background-position: -86px -2px;
     filter: invert(1) opacity(0.06);
     animation: drift-left 22s linear infinite;
+}
+
+@keyframes drift-left {
+    from { transform: translateX(calc(100vw + 60px)); }
+    to { transform: translateX(-120px); }
 }

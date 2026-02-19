@@ -74,11 +74,7 @@
             <div class="dino-ground-wrap">
                 <div class="dino-ground"></div>
             </div>
-            <div class="dino-sprite dino-runner"></div>
-            <div class="dino-sprite dino-cactus-sm" style="animation-delay: 3s"></div>
-            <div class="dino-sprite dino-cactus-lg" style="animation-delay: 7s"></div>
-            <div class="dino-sprite dino-cactus-sm" style="animation-delay: 10s"></div>
-            <div class="dino-sprite dino-ptero" style="animation-delay: 0s, 5s"></div>
+            <div class="dino-sprite dino-runner" id="dinoRunner"></div>
             <div class="dino-sprite dino-cloud" style="top: 18%; animation-delay: 0s"></div>
             <div class="dino-sprite dino-cloud" style="top: 12%; animation-delay: 8s"></div>
             <div class="dino-sprite dino-cloud" style="top: 25%; animation-delay: 15s"></div>
@@ -197,9 +193,51 @@
                 }
             });
 
-            // Chrome Dino scene — fade in after 2 seconds
+            // Chrome Dino scene — fade in after 2 seconds, then run choreography
             setTimeout(() => {
-                document.getElementById("dinoScene").classList.add("active");
+                const scene = document.getElementById("dinoScene");
+                const dino = document.getElementById("dinoRunner");
+                scene.classList.add("active");
+
+                const OBSTACLE_CROSS_TIME = 4000; // ms for obstacle to cross viewport
+                const DINO_LEFT_PCT = 10; // dino fixed at 10% from left
+                // Time for obstacle to reach dino position
+                const hitTime = ((100 - DINO_LEFT_PCT) / 106) * OBSTACLE_CROSS_TIME;
+                const JUMP_LEAD = 350; // ms before hit to start jump
+                const DUCK_LEAD = 400; // ms before hit to start duck
+
+                function spawnObstacle(cls) {
+                    const el = document.createElement("div");
+                    el.className = "dino-sprite " + cls;
+                    scene.appendChild(el);
+                    el.addEventListener("animationend", () => el.remove());
+                }
+
+                function runCycle() {
+                    // 0 s — cactus enters from the right
+                    spawnObstacle("dino-cactus-lg");
+
+                    // Dino jumps as cactus arrives
+                    setTimeout(() => {
+                        dino.classList.add("jump");
+                        setTimeout(() => dino.classList.remove("jump"), 550);
+                    }, hitTime - JUMP_LEAD);
+
+                    // 5 s — pterodactyl enters
+                    setTimeout(() => spawnObstacle("dino-ptero"), 5000);
+
+                    // Dino ducks as ptero arrives
+                    setTimeout(
+                        () => {
+                            dino.classList.add("duck");
+                            setTimeout(() => dino.classList.remove("duck"), 600);
+                        },
+                        5000 + hitTime - DUCK_LEAD,
+                    );
+                }
+
+                runCycle();
+                setInterval(runCycle, 10000);
             }, 2000);
         </script>
     </body>
