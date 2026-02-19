@@ -550,39 +550,11 @@ body {
         font-size: 12px;
     }
 
-    /* Scale dino sprites down on small screens */
-    .dino-sprite {
-        transform-origin: bottom left;
-        background-size: 924px 51px; /* 75% of 1233x68 */
-    }
-
-    .dino-runner {
-        width: 33px;
-        height: 35px;
-    }
-
-    .dino-runner.duck {
-        width: 44px;
-        height: 20px;
-    }
-
-    .dino-cactus-lg {
-        width: 19px;
-        height: 38px;
-    }
-
-    .dino-ptero {
-        width: 35px;
-        height: 30px;
-    }
-
-    .dino-cloud {
-        width: 35px;
-        height: 10px;
-    }
-
-    .dino-ground {
-        background-size: 924px 51px;
+    /* Scale entire dino scene down on small screens — 
+       use transform instead of background-size to preserve sprite positions */
+    .dino-scene {
+        transform: scale(0.75);
+        transform-origin: bottom center;
     }
 }
 
@@ -640,5 +612,10 @@ body {
     .footer-alert svg {
         width: 14px;
         height: 14px;
+    }
+
+    .dino-scene {
+        transform: scale(0.6);
+        transform-origin: bottom center;
     }
 }
