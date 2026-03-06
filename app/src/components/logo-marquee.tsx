@@ -21,9 +21,9 @@ export function LogoMarquee() {
     return (
         <div className="relative w-full overflow-hidden border-t border-[var(--theme-outline-outline-variant)] bg-white py-6">
             {/* Left fade */}
-            <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 z-20 w-24 sm:w-32 bg-gradient-to-r from-white via-white/80 to-transparent" />
             {/* Right fade */}
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-20 w-24 sm:w-32 bg-gradient-to-l from-white via-white/80 to-transparent" />
 
             <div className="flex animate-marquee">
                 {/* Render logos twice for seamless loop */}

@@ -1,3 +1,8 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
+
 /**
  * Bento-style grid for the hero section right panel.
  * Features glassmorphism container, geometric SVG cards,
@@ -6,6 +11,30 @@
  */
 
 /* ---- Top-left: Green leaf/wave pattern ---- */
+function PulsingCircle({ cx, cy, delay }: { cx: number; cy: number; delay: number }) {
+    return (
+        <g>
+            <motion.circle
+                cx={cx}
+                cy={cy}
+                fill="none"
+                stroke="#638FF5"
+                strokeWidth="1.5"
+                initial={{ r: 3.5, opacity: 0.8 }}
+                animate={{ r: 16, opacity: 0 }}
+                transition={{
+                    duration: 1.2,
+                    repeat: Infinity,
+                    delay: delay,
+                    repeatDelay: 0.6,
+                    ease: "easeOut",
+                }}
+            />
+            <circle cx={cx} cy={cy} r="3.5" fill="#638FF5" />
+        </g>
+    );
+}
+
 function TopLeftCard() {
     return (
         <div className="relative overflow-hidden rounded-2xl h-full min-h-40">
@@ -64,9 +93,19 @@ function TopCenterCard() {
 
 /* ---- Photo placeholder ---- */
 function PhotoCard({ label }: { label: string }) {
+    const src = label === "Photo 1" ? "/img/poster-1.webp" : label === "Photo 2" ? "/img/poster-2.webp" : undefined;
+
     return (
         <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-[#95D2B3]/20 via-[#D6C7FF]/20 to-[#638FF5]/30 h-full min-h-40 flex items-center justify-center">
-            <span className="text-xs font-medium text-grey-600 opacity-50 select-none">{label}</span>
+            {src ? (
+                <Image
+                    src={src}
+                    alt={label}
+                    fill
+                    className="absolute inset-0 h-full w-full object-cover"
+                />
+            ) : null}
+            <span className="relative z-10 text-xs font-medium text-grey-600 opacity-50 select-none">{label}</span>
         </div>
     );
 }
@@ -76,7 +115,10 @@ function DarkCard() {
     return (
         <div className="relative overflow-hidden rounded-4xl bg-[#111111] h-full min-h-40">
             {/* Background Glare Effect */}
-            <div className="absolute top-0 left-0 w-full h-[200%] pointer-events-none opacity-30" style={{ background: "conic-gradient(from 90deg at -15.5% 20%, rgba(158, 158, 158, 0.14) 0deg, rgba(255, 255, 255, 0.9) 23.5deg, rgba(255, 255, 255, 0.25) 41.3deg, rgba(153, 153, 153, 0.1) 358.8deg, rgba(158, 158, 158, 0.14) 360deg)" }} />
+            <div
+                className="absolute top-0 left-0 w-full h-[200%] pointer-events-none opacity-30"
+                style={{ background: "conic-gradient(from 90deg at -15.5% -10%, rgba(158, 158, 158, 0.14) 10deg, rgba(255, 255, 255, 0.9) 23.5deg, rgba(255, 255, 255, 0.25) 41.3deg, rgba(153, 153, 153, 0.1) 358.8deg, rgba(158, 158, 158, 0.14) 360deg)" }}
+            />
 
             {/* Perspective grid */}
             <svg className="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 512 160" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -115,7 +157,7 @@ function DarkCard() {
             </svg>
 
             {/* Tangled thread with pin points */}
-            <div className="absolute inset-0 flex items-center justify-center py-6">
+            <div className="absolute inset-0 flex items-center justify-center pt-12 md:py-6">
                 <svg className="w-full h-full" viewBox="-10 -35 630 130" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet">
                     {/* Tangled thread path */}
                     <path
@@ -129,45 +171,45 @@ function DarkCard() {
                     {/* Pin points — vertical lines rising from thread to labels. Circle at TOP of lines. */}
                     {/* Problems */}
                     <line x1="25" y1="30" x2="25" y2="-8" stroke="#638FF5" strokeWidth="1.2" />
-                    <circle cx="25" cy="-8" r="3.5" fill="#638FF5" />
+                    <PulsingCircle cx={25} cy={-8} delay={0} />
 
                     {/* Understand */}
                     <line x1="127" y1="50" x2="127" y2="-10" stroke="#638FF5" strokeWidth="1.2" />
-                    <circle cx="127" cy="-8" r="3.5" fill="#638FF5" />
+                    <PulsingCircle cx={127} cy={-10} delay={1.2} />
 
                     {/* Define / Point of View */}
                     <line x1="250" y1="56" x2="250" y2="13" stroke="#638FF5" strokeWidth="1.2" />
-                    <circle cx="250" cy="13" r="3.5" fill="#638FF5" />
+                    <PulsingCircle cx={250} cy={13} delay={2.4} />
 
                     {/* Develop Idea */}
                     <line x1="360" y1="56.5" x2="360" y2="-10" stroke="#638FF5" strokeWidth="1.2" />
-                    <circle cx="360" cy="-10" r="3.5" fill="#638FF5" />
+                    <PulsingCircle cx={360} cy={-10} delay={3.6} />
 
                     {/* Build */}
                     <line x1="470" y1="56.5" x2="470" y2="18" stroke="#638FF5" strokeWidth="1.2" />
-                    <circle cx="470" cy="18" r="3.5" fill="#638FF5" />
+                    <PulsingCircle cx={470} cy={18} delay={4.8} />
 
                     {/* Test */}
                     <line x1="565" y1="56.5" x2="565" y2="-10" stroke="#638FF5" strokeWidth="1.2" />
-                    <circle cx="565" cy="-10" r="3.5" fill="#638FF5" />
+                    <PulsingCircle cx={565} cy={-10} delay={6.0} />
 
                     {/* Text labels */}
-                    <text x="10" y="-20" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="10" y="-25" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Problems
                     </text>
-                    <text x="100" y="-20" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="100" y="-25" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Understand
                     </text>
-                    <text x="210" y="2" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="210" y="-4" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Define Point of View
                     </text>
-                    <text x="332" y="-22" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="332" y="-26" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Develop Idea
                     </text>
-                    <text x="457" y="2" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="457" y="0" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Build
                     </text>
-                    <text x="555" y="-22" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="555" y="-26" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Test
                     </text>
                 </svg>
@@ -263,49 +305,29 @@ export function HeroBentoGrid() {
     return (
         <div className="relative w-full h-full">
             {/* Glassmorphism container */}
-            <div className="bento-glass relative grid grid-cols-3 gap-2.5 sm:gap-3 w-full h-full rounded-[2rem] p-3 sm:p-4">
+            <div className="bento-glass relative grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3 w-full h-full rounded-[2rem] p-3 sm:p-4 hover:shadow-[0_8px_32px_rgba(99,143,245,0.1)] transition-shadow duration-500 z-20 bg-white/20 backdrop-blur-xl border border-white/40 ring-1 ring-white/30">
                 {/* Row 1: 3 equal cards */}
-                <TopLeftCard />
-                <TopCenterCard />
+                <div className="hidden md:block">
+                    <TopLeftCard />
+                </div>
+                <div className="hidden md:block">
+                    <TopCenterCard />
+                </div>
                 <PhotoCard label="Photo 1" />
 
                 {/* Row 2: Dark card spans full width */}
-                <div className="col-span-3">
+                <div className="md:col-span-3">
                     <DarkCard />
                 </div>
 
                 {/* Row 3: 3 equal cards */}
                 <PhotoCard label="Photo 2" />
-                <BottomCenterCard />
-                <BottomRightCard />
-            </div>
-
-            {/* Center glare light effect */}
-            <div className="pointer-events-none absolute rounded-[2rem] overflow-hidden inset-0 z-10" aria-hidden="true">
-                {/* Primary white/blue radial glow */}
-                <div
-                    className="absolute"
-                    style={{
-                        top: "25%",
-                        left: "20%",
-                        width: "60%",
-                        height: "55%",
-                        background: "radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.25) 0%, rgba(99,143,245,0.08) 40%, transparent 70%)",
-                        filter: "blur(30px)",
-                    }}
-                />
-                {/* Secondary soft blue highlight */}
-                <div
-                    className="absolute"
-                    style={{
-                        top: "30%",
-                        left: "30%",
-                        width: "40%",
-                        height: "40%",
-                        background: "radial-gradient(ellipse at 50% 45%, rgba(99,143,245,0.12) 0%, rgba(214,199,255,0.06) 50%, transparent 70%)",
-                        filter: "blur(20px)",
-                    }}
-                />
+                <div className="hidden md:block">
+                    <BottomCenterCard />
+                </div>
+                <div className="hidden md:block">
+                    <BottomRightCard />
+                </div>
             </div>
         </div>
     );
