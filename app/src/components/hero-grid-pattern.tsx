@@ -1,6 +1,6 @@
-export function HeroGridPattern({ className }: { className?: string }) {
+export function HeroGridPattern({ className, style }: { className?: string; style?: React.CSSProperties }) {
     return (
-        <svg className={className} width="1782" height="1080" viewBox="0 0 1782 1080" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <svg className={className} style={style} width="1782" height="1080" viewBox="0 0 1782 1080" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
             <mask id="mask0_32_162" style={{ maskType: "alpha" }} maskUnits="userSpaceOnUse" x="-361" y="-361" width="2143" height="1646">
                 <g clipPath="url(#clip0_32_162)">
                     <path d="M775.747 234.764C775.747 382.024 568.071 513.542 447.966 513.542C327.86 513.542 -422.546 -2.95531 -422.546 -150.215C-422.546 -297.475 655.642 -94.7445 775.747 -94.7445C895.853 -94.7445 775.747 87.5041 775.747 234.764Z" fill="url(#paint0_linear_32_162)" />
