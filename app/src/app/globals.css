@@ -109,6 +109,16 @@
     --radius-shape-xl: var(--shape-corner-xl);
     --radius-shape-2xl: var(--shape-corner-2xl);
     --radius-rounded: var(--shape-corner-rounded);
+    /* Slightly slower, smoother shiny text animation */
+    --animate-shiny-text: shiny-text 8s infinite;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+        }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+        }
+    }
 }
 
 :root {

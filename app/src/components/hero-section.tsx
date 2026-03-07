@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { HeroGridPattern } from "./hero-grid-pattern";
 import { HeroBentoGrid } from "./hero-bento-grid";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 export function HeroSection() {
     return (
@@ -12,29 +13,29 @@ export function HeroSection() {
             <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
                 <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 1024" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                     <g filter="url(#blur-green)" transform="translate(200, 00)">
-                        <path d="M969.63 431.593C1018.41 628.973 1009.33 740 831.317 740C653.306 740 509 595.846 509 418.023C509 240.2 791.619 43 969.63 43C1136.96 142.924 969.63 253.77 969.63 431.593Z" fill="#95D2B3"/>
+                        <path d="M969.63 431.593C1018.41 628.973 1009.33 740 831.317 740C653.306 740 509 595.846 509 418.023C509 240.2 791.619 43 969.63 43C1136.96 142.924 969.63 253.77 969.63 431.593Z" fill="#95D2B3" />
                     </g>
                     <g filter="url(#blur-blue)" transform="translate(10, 10)">
-                        <circle cx="1250" cy="850" r="350" fill="#638FF5"/>
+                        <circle cx="1250" cy="850" r="350" fill="#638FF5" />
                     </g>
                     <g filter="url(#blur-purple)" transform="translate(10, -10)">
-                        <path d="M1004.54 94.2996C962.296 249.818 1008.48 439 871.637 439C734.797 439 509 230.991 509 94.2996C509 -42.3917 619.93 -9.53726 756.77 -9.53726C893.61 -9.53726 1051.53 -26.7501 1004.54 94.2996Z" fill="#D6C7FF"/>
+                        <path d="M1004.54 94.2996C962.296 249.818 1008.48 439 871.637 439C734.797 439 509 230.991 509 94.2996C509 -42.3917 619.93 -9.53726 756.77 -9.53726C893.61 -9.53726 1051.53 -26.7501 1004.54 94.2996Z" fill="#D6C7FF" />
                     </g>
                     <defs>
                         <filter id="blur-green" x="-2000" y="-2000" width="6000" height="6000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                            <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1558"/>
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                            <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1558" />
                         </filter>
                         <filter id="blur-blue" x="-2000" y="-2000" width="6000" height="6000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                            <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1560"/>
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                            <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1560" />
                         </filter>
                         <filter id="blur-purple" x="-2000" y="-2000" width="2000" height="2000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                            <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1559"/>
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                            <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1559" />
                         </filter>
                     </defs>
                 </svg>
@@ -61,10 +62,10 @@ export function HeroSection() {
                     <p className="max-w-[520px] text-base sm:text-lg leading-7 text-[var(--palette-grey-800)] text-center md:text-left">Empowering learning and creativity based on Science, Technology, Engineering, Art, Mathematic (STEAM) project for elementary school students in rural areas.</p>
 
                     <div className="pt-2">
-                        <a href="/join" className="inline-flex items-center gap-3 rounded-full bg-[var(--palette-grey-1200)] px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--palette-grey-900)]">
-                            Join Our Voluntrip
-                            <ArrowRight className="w-4 h-4" />
-                        </a>
+                        <ShinyButton href="/join">
+                            <span>Join Our Voluntrip</span>
+                            <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+                        </ShinyButton>
                     </div>
                 </div>
 

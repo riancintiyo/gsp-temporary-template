@@ -194,22 +194,22 @@ function DarkCard() {
                     <PulsingCircle cx={565} cy={-10} delay={6.0} />
 
                     {/* Text labels */}
-                    <text x="10" y="-25" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="10" y="-25" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Problems
                     </text>
-                    <text x="100" y="-25" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="100" y="-25" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Understand
                     </text>
-                    <text x="210" y="-4" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="210" y="-4" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Define Point of View
                     </text>
-                    <text x="332" y="-26" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="332" y="-26" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Develop Idea
                     </text>
-                    <text x="457" y="0" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="457" y="0" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Build
                     </text>
-                    <text x="555" y="-26" fill="white" fontSize="10" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="555" y="-26" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Test
                     </text>
                 </svg>
