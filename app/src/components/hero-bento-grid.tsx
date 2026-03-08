@@ -14,7 +14,7 @@ import Image from "next/image";
 function PulsingCircle({ cx, cy, delay }: { cx: number; cy: number; delay: number }) {
     return (
         <g>
-            <motion.circle
+            {/* <motion.circle
                 cx={cx}
                 cy={cy}
                 fill="none"
@@ -29,7 +29,7 @@ function PulsingCircle({ cx, cy, delay }: { cx: number; cy: number; delay: numbe
                     repeatDelay: 0.6,
                     ease: "easeOut",
                 }}
-            />
+            /> */}
             <circle cx={cx} cy={cy} r="3.5" fill="#638FF5" />
         </g>
     );

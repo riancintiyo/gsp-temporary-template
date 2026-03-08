@@ -86,7 +86,7 @@ export function AboutSection() {
                     <div className="flex-1 flex flex-col">
                         {/* Badge + date row */}
                         <div className="flex items-center justify-between mb-16 lg:mb-24">
-                            <div className="inline-flex items-center gap-2 rounded-full border border-grey-100 bg-white px-4 py-2 text-sm font-medium text-grey-1200">
+                            <div className="inline-flex items-center gap-2 rounded-full border border-grey-100 bg-white px-4 py-2 text-sm font-medium text-grey-1200 shadow-webflow-dropshadow">
                                 <BlueFlowerIcon className="shrink-0" />
                                 <span>About GSP</span>
                             </div>
