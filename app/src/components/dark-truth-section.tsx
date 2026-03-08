@@ -142,7 +142,7 @@ function RouteLine() {
 
 function BgSvgMap() {
     return (
-        <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 md:top-40 md:-bottom-20 z-0">
+        <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 md:top-20 md:-bottom-20 z-0">
             <div className="relative w-full h-full">
                 <Image src="/img/gradient-blob.webp" alt="Section glow" fill priority className="object-cover" />
             </div>

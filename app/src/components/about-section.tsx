@@ -13,7 +13,7 @@ function BlueFlowerIcon({ className }: { className?: string }) {
 
 export function AboutSection() {
     return (
-        <section className="relative w-full overflow-hidden bg-white">
+        <section className="relative py-16 w-full overflow-hidden bg-white">
             {/* Layer 1: Grid pattern — left side only, hidden on mobile */}
             <div className="pointer-events-none absolute inset-0 hidden lg:block" style={{
                 maskImage: "linear-gradient(to right, black 45%, transparent 65%)",
