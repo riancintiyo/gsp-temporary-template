@@ -1,6 +1,6 @@
 export function ProblemsSection() {
     return (
-        <section className="relative w-full py-16 lg:py-32 bg-white overflow-hidden font-sans">
+        <section className="relative w-full py-16 lg:py-24 bg-white overflow-hidden font-sans">
             <div className="relative z-10 mx-auto w-full max-w-360 px-8 lg:px-(--page-margin)">
                 {/* Title */}
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-grey-1200 mb-6">The Problems in Wonosobo</h2>
@@ -35,7 +35,7 @@ export function ProblemsSection() {
                                     <div className="flex flex-col gap-2">
                                         <h3 className="text-lg font-bold text-grey-1200">Poverty</h3>
                                         <p className="text-sm text-grey-800 leading-relaxed">
-                                            In 2024, Wonosobo was ranked third as the poorest city in Central Java, with a total of 15.28% or 121.49 thousand people still living under poverty. One of the primary factor that contribute to this condition is lack of education, in which, this condition
+                                            In 2024, Wonosobo was ranked third as the poorest city in Central Java, with a total of <strong>15.28%</strong> or <strong>121.49 thousand people</strong> still living under poverty. One of the primary factor that contribute to this condition is lack of education, in which, this condition
                                             can perpetuate poverty and hinder economic growth.
                                         </p>
                                     </div>
@@ -103,7 +103,7 @@ export function ProblemsSection() {
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <h3 className="text-xl font-bold text-grey-1200">HDI/IPM Index</h3>
-                                    <p className="text-sm text-grey-800 leading-relaxed">In 2023, Indonesia&apos;s HDI reached 74.39 and for Central Java the number decreased to 73.39. However, for Wonosobo, the index only seized for 69.37 point.</p>
+                                    <p className="text-sm text-grey-800 leading-relaxed">In 2023, Indonesia&apos;s HDI reached <strong>74.39</strong> and for Central Java the number decreased to <strong>73.39</strong>. However, for Wonosobo, the index only seized for <strong>69.37</strong> point.</p>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@ export function ProblemsSection() {
                                 <div className="flex flex-col gap-2">
                                     <h3 className="text-xl font-bold text-grey-1200">Low Education Rate</h3>
                                     <p className="text-sm text-grey-800 leading-relaxed">
-                                        Only 20.47% people above 15 years old in Wonosobo graduated from junior high school, the number decreased for high school level which only accounted for 16.6% and then the number plummeted for they who graduated for university level with a mere of 3.72% in
+                                        Only <strong>20.47%</strong> people above 15 years old in Wonosobo graduated from junior high school, the number decreased for high school level which only accounted for <strong>16.6%</strong> and then the number plummeted for they who graduated for university level with a mere of <strong>3.72%</strong> in
                                         2022.
                                     </p>
                                 </div>

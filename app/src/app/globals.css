@@ -684,8 +684,13 @@
         -moz-osx-font-smoothing: grayscale;
         color: var(--theme-surface-on-surface);
         @apply bg-background text-foreground;
-        font-weight: 400;
         width: 100%;
+    }
+
+    /* Ensure semantic bold elements render bold despite reset */
+    strong,
+    b {
+        font-weight: 700;
     }
 
     h1,

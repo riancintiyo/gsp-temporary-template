@@ -1,5 +1,6 @@
 "use client";
 
+import { ReactNode } from "react";
 import Image from "next/image";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -15,7 +16,7 @@ const tagColorMap: Record<TagColor, string> = {
 interface AccordionItemData {
     value: string;
     trigger: string;
-    content: string;
+    content: ReactNode;
     tags: { label: string; color: TagColor }[];
 }
 
@@ -23,8 +24,12 @@ const items: AccordionItemData[] = [
     {
         value: "steam-occupation",
         trigger: "STEAM Occupation",
-        content:
-            "Occupations that related to STEM and STEAM will growth until 10.4% compared to 3.6% for non STEM occupations between 2024 and 2033. Moreover, more than 80% of jobs over the next decade will require STEM skills. Lastly, an additional 653,000 tech workers will be needed by 2030 to meet demand.",
+        content: (
+            <>
+                Occupations that related to <strong>STEM and STEAM</strong> will growth until <strong>10,4%</strong> compared to <strong>3,6%</strong> for non STEM occupations between 2024 and 2033. Moreover, more than 80% of jobs over the next decade will require STEM skills. Lastly, an additional <strong>653,000</strong> tech workers will be
+                needed by 2030 to meet demand.
+            </>
+        ),
         tags: [
             { label: "Science", color: "green" },
             { label: "Engineering", color: "teal" },
@@ -33,7 +38,7 @@ const items: AccordionItemData[] = [
     {
         value: "stem-impact",
         trigger: "STEM Impact",
-        content: "Shifting just 1% workforce into STEM roles would add $57.4 billion to GDP (net present value over 20 years). Additionally, between 1960 and 2000, 75% of the growth in gross domestic product around the world was linked to increased math and science skills.",
+        content: <>Shifting just <strong>1%</strong> workforce into STEM roles would add <strong>$57.4 billion</strong> to GDP (net present value over 20 years). Additionally, between 1960 and 2000, 75% of the growth in gross domestic product around the world was linked to increased math and science skills.</>,
         tags: [
             { label: "Science", color: "green" },
             { label: "Engineering", color: "teal" },
@@ -44,8 +49,12 @@ const items: AccordionItemData[] = [
     {
         value: "stem-children",
         trigger: "STEM for Children",
-        content:
-            "Early STEM intervention helps children broaden their horizon and aspirations, where at the age of 7 years those factors are affected by stereotypes. Subsequently, teachers childhood experiences are grounded in the construction of identity. Through conversations and activities, those things can influence a child's future aspirations and career.",
+        content: (
+            <>
+                Early STEM intervention helps children broaden their horizon and aspirations, where at the age of <strong>7 years</strong> those factors are affected by stereotypes. Subsequently, teachers childhood experiences are grounded in the construction of identity. Through conversations and activities, those
+                things can influence a child’s future aspirations and career.
+            </>
+        ),
         tags: [
             { label: "Science", color: "green" },
             { label: "Engineering", color: "teal" },
@@ -60,12 +69,12 @@ function Tag({ label, color }: { label: string; color: TagColor }) {
 
 export function PovertyCycleSection() {
     return (
-        <section className="relative w-full py-16 lg:py-32 bg-white overflow-hidden font-sans">
+        <section className="relative w-full py-16 lg:py-24 bg-white overflow-hidden font-sans">
             <div className="relative z-10 mx-auto w-full max-w-360 px-8 lg:px-(--page-margin)">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center md:items-start">
                     {/* Left — Accordions */}
-                    <div>
-                        <Accordion type="multiple" className="w-full mt-2" defaultValue={["steam-occupation"]}>
+                    <div className="order-2 mt-2">
+                        <Accordion type="multiple" className="w-full" defaultValue={["steam-occupation"]}>
                             {items.map((item) => (
                                 <AccordionItem key={item.value} value={item.value} className="rounded-2xl border border-grey-100 bg-white px-6 py-2 shadow-webflow-dropshadow mb-4 last:mb-0">
                                     <AccordionTrigger className="text-lg font-bold text-grey-1200 hover:no-underline">{item.trigger}</AccordionTrigger>
@@ -83,14 +92,14 @@ export function PovertyCycleSection() {
                     </div>
 
                     {/* Right — Title + Cycle Image */}
-                    <div className="flex flex-col gap-8">
-                        <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-grey-1200 leading-tight">Cycle of Poverty and Opportunities in Wonosobo</h2>
-                        <div className="relative w-full max-w-75 md:max-w-125 overflow-hidden rounded-2xl">
+                    <div className="order-1 flex flex-col items-center justify-center md:items-start md:justify-start  gap-8">
+                        <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-grey-1200 leading-tight text-center md:text-start">Cycle of Poverty and Opportunities in Wonosobo</h2>
+                        <div className="relative w-full max-w-75 md:max-w-124 overflow-hidden rounded-2xl">
                             <Image
                                 src="/img/poverty-cycle.webp"
                                 alt="Cycle of Poverty diagram showing the relationship between lack of education, lack of opportunity, low income, and insufficient living conditions, with GSP breaking the cycle"
-                                width={480}
-                                height={240}
+                                width={400}
+                                height={160}
                                 className="w-full h-auto object-cover rounded-2xl"
                             />
                         </div>

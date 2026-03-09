@@ -5,6 +5,7 @@ import { AboutSection } from "@/components/about-section";
 import { DarkTruthSection } from "@/components/dark-truth-section";
 import { ProblemsSection } from "@/components/problems-section";
 import { PovertyCycleSection } from "@/components/poverty-cycle-section";
+import { WhatWeDoSection } from "@/components/what-we-do-section";
 
 export default function Home() {
     return (
@@ -16,6 +17,7 @@ export default function Home() {
             <DarkTruthSection />
             <ProblemsSection />
             <PovertyCycleSection />
+            <WhatWeDoSection />
         </div>
     );
 }
