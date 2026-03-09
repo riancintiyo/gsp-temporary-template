@@ -6,7 +6,7 @@ export function ProblemsSection() {
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-grey-1200 mb-6">The Problems in Wonosobo</h2>
 
                 {/* Intro paragraph */}
-                <p className="max-w-160 text-base text-grey-800 leading-relaxed mb-12">
+                <p className="max-w-240 text-base text-grey-800 leading-relaxed mb-12 ml-2">
                     The 2022 <strong className="font-bold text-grey-1200">UNDP&apos;s</strong> <strong className="font-bold text-grey-1200">Human Development Index</strong> <strong className="font-bold text-grey-1200">(HDI)</strong> stated that Indonesia was ranked 6th in Southeast Asia, with an
                     average of only <strong className="font-bold text-grey-1200">8.6 years</strong> of schooling. In <strong className="font-bold text-grey-1200">Wonosobo</strong>, Central Java, the mean years of schooling in 2023 was only{" "}
                     <strong className="font-bold text-grey-1200">6.88 years</strong>, where the rate of students who continued their study to junior high school was only around <strong className="font-bold text-grey-1200">40%</strong>.
@@ -27,15 +27,19 @@ export function ProblemsSection() {
                         {/* Poverty + Chart card */}
                         <div className="order-2 md:order-1 rounded-2xl flex flex-col-reverse md:flex-row border border-grey-100 bg-white p-6 gap-6 shadow-webflow-dropshadow">
                             {/* Text side */}
-                            <div className="flex flex-col gap-4 flex-1 min-w-0">
-                                <div className="w-12 h-12 rounded-xl bg-[#95D2B3] flex items-center justify-center">
-                                    <GreenFlowerIcon />
+                            <div className="flex-1 min-w-0">
+                                <div className="relative z-10 flex flex-col gap-12">
+                                    <div className="w-12 h-12 rounded-xl bg-[#95D2B3] flex items-center justify-center">
+                                        <GreenFlowerIcon />
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <h3 className="text-lg font-bold text-grey-1200">Poverty</h3>
+                                        <p className="text-sm text-grey-800 leading-relaxed">
+                                            In 2024, Wonosobo was ranked third as the poorest city in Central Java, with a total of 15.28% or 121.49 thousand people still living under poverty. One of the primary factor that contribute to this condition is lack of education, in which, this condition
+                                            can perpetuate poverty and hinder economic growth.
+                                        </p>
+                                    </div>
                                 </div>
-                                <h3 className="text-lg font-bold text-grey-1200">Poverty</h3>
-                                <p className="text-sm text-grey-800 leading-relaxed">
-                                    In 2024, Wonosobo was ranked third as the poorest city in Central Java, with a total of 15.28% or 121.49 thousand people still living under poverty. One of the primary factor that contribute to this condition is lack of education, in which, this condition can
-                                    perpetuate poverty and hinder economic growth.
-                                </p>
                             </div>
                             {/* Chart side with grid background */}
                             <div className="relative flex-1 min-w-0 flex flex-col justify-end">
@@ -61,15 +65,17 @@ export function ProblemsSection() {
                                     WebkitMask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",
                                 }}
                             />
-                            <div className="relative z-10 flex flex-col gap-4">
+                            <div className="relative z-10 flex flex-col gap-12">
                                 <div className="w-12 h-12 rounded-xl bg-[#D6C7FF] flex items-center justify-center">
                                     <PurpleFlowerIcon />
                                 </div>
-                                <h3 className="text-xl font-bold text-grey-1200">Years of Schooling</h3>
-                                <p className="text-sm text-grey-800 leading-relaxed">
-                                    In <strong className="font-bold text-grey-1200">Wonosobo</strong>, Central Java, the mean years of schooling in 2023 was only <strong className="font-bold text-grey-1200">6.88 years</strong>. The region&apos;s and Central Java&apos;s mean years of schooling are{" "}
-                                    <strong className="font-bold text-grey-1200">8.7 years</strong> and <strong className="font-bold text-grey-1200">8.01 years</strong> respectively.
-                                </p>
+                                <div className="flex flex-col gap-2">
+                                    <h3 className="text-xl font-bold text-grey-1200">Years of Schooling</h3>
+                                    <p className="text-sm text-grey-800 leading-relaxed">
+                                        In <strong className="font-bold text-grey-1200">Wonosobo</strong>, Central Java, the mean years of schooling in 2023 was only <strong className="font-bold text-grey-1200">6.88 years</strong>. The region&apos;s and Central Java&apos;s mean years of schooling
+                                        are <strong className="font-bold text-grey-1200">8.7 years</strong> and <strong className="font-bold text-grey-1200">8.01 years</strong> respectively.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,25 +97,30 @@ export function ProblemsSection() {
                                     WebkitMask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",
                                 }}
                             />
-                            <div className="relative z-10 flex flex-col gap-4">
-                                <div className="w-12 h-12 rounded-xl bg-[#95D2B3] flex items-center justify-center">
-                                    <GreenFlowerIcon />
+                            <div className="relative z-10 flex flex-col gap-12">
+                                <div className="w-12 h-12 rounded-xl bg-[#FBBF24] flex items-center justify-center">
+                                    <YellowStarIcon />
                                 </div>
-                                <h3 className="text-xl font-bold text-grey-1200">HDI/IPM Index</h3>
-                                <p className="text-sm text-grey-800 leading-relaxed">In 2023, Indonesia&apos;s HDI reached 74.39 and for Central Java the number decreased to 73.39. However, for Wonosobo, the index only seized for 69.37 point.</p>
+                                <div className="flex flex-col gap-2">
+                                    <h3 className="text-xl font-bold text-grey-1200">HDI/IPM Index</h3>
+                                    <p className="text-sm text-grey-800 leading-relaxed">In 2023, Indonesia&apos;s HDI reached 74.39 and for Central Java the number decreased to 73.39. However, for Wonosobo, the index only seized for 69.37 point.</p>
+                                </div>
                             </div>
                         </div>
 
                         {/* Low Education Rate + Student Profiles */}
-                        <div className="rounded-2xl flex flex-col-reverse md:flex-row border border-grey-100 bg-white p-6 gap-6 shadow-webflow-dropshadow">
-                            <div className="flex flex-col gap-6">
+                        <div className="relative overflow-visible rounded-2xl flex flex-col-reverse md:flex-row border border-grey-100 bg-white p-6 gap-6 shadow-webflow-dropshadow">
+                            <div className="relative z-10 flex flex-col gap-12">
                                 <div className="w-12 h-12 rounded-xl bg-[#638FF5] flex items-center justify-center">
                                     <BlueStarIcon />
                                 </div>
-                                <h3 className="text-xl font-bold text-grey-1200">Low Education Rate</h3>
-                                <p className="text-sm text-grey-800 leading-relaxed">
-                                    Only 20.47% people above 15 years old in Wonosobo graduated from junior high school, the number decreased for high school level which only accounted for 16.6% and then the number plummeted for they who graduated for university level with a mere of 3.72% in 2022.
-                                </p>
+                                <div className="flex flex-col gap-2">
+                                    <h3 className="text-xl font-bold text-grey-1200">Low Education Rate</h3>
+                                    <p className="text-sm text-grey-800 leading-relaxed">
+                                        Only 20.47% people above 15 years old in Wonosobo graduated from junior high school, the number decreased for high school level which only accounted for 16.6% and then the number plummeted for they who graduated for university level with a mere of 3.72% in
+                                        2022.
+                                    </p>
+                                </div>
                             </div>
                             <StudentProfileStack />
                         </div>
@@ -125,7 +136,7 @@ function StatCard({ icon, bgColor, value, label }: { icon: React.ReactNode; bgCo
     return (
         <div className="flex items-center gap-3 rounded-xl border border-grey-100 bg-white px-4 py-3 shadow-webflow-dropshadow">
             <div className={`w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center shrink-0`}>{icon}</div>
-            <div className="min-w-0">
+            <div className="min-w-0 flex flex-col gap-1">
                 <p className="text-lg font-bold text-grey-1200 leading-tight">{value}</p>
                 <p className="text-xs text-grey-800 leading-tight">{label}</p>
             </div>
@@ -213,11 +224,85 @@ function ChartGridBackground() {
 function ChartLineSvg() {
     return (
         <svg className="w-full" viewBox="0 0 254 174" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <style>
+                {`
+                    @keyframes drawNeon0 {
+                        0% { stroke-dashoffset: 12; animation-timing-function: ease-in; }
+                        40% { stroke-dashoffset: -100; }
+                        100% { stroke-dashoffset: -100; }
+                    }
+                    @keyframes drawNeon1 {
+                        0% { stroke-dashoffset: 8; animation-timing-function: ease-in; }
+                        40% { stroke-dashoffset: -104; }
+                        100% { stroke-dashoffset: -104; }
+                    }
+                    @keyframes drawNeon2 {
+                        0% { stroke-dashoffset: 4; animation-timing-function: ease-in; }
+                        40% { stroke-dashoffset: -108; }
+                        100% { stroke-dashoffset: -108; }
+                    }
+                    @keyframes drawNeon3 {
+                        0% { stroke-dashoffset: 1.5; animation-timing-function: ease-in; }
+                        40% { stroke-dashoffset: -110.5; }
+                        100% { stroke-dashoffset: -110.5; }
+                    }
+
+                    .neon-path-0 { animation: drawNeon0 5s infinite; }
+                    .neon-path-1 { animation: drawNeon1 5s infinite; }
+                    .neon-path-2 { animation: drawNeon2 5s infinite; }
+                    .neon-path-3 { animation: drawNeon3 5s infinite; }
+                `}
+            </style>
             <g filter="url(#filter0_ddd_problems)">
+                {/* Base subtle static line */}
                 <path
                     d="M18 108.284C31.8333 108.284 31.8333 93.192 45.6667 93.192C59.5 93.192 59.5 64.156 73.3333 64.156C87.1667 64.156 87.1667 9.5 101 9.5C114.833 9.5 114.833 62.882 128.667 62.882C142.5 62.882 142.5 129.214 156.333 129.214C170.167 129.214 170.167 25.698 184 25.698C197.833 25.698 197.833 113.24 211.667 113.24C225.5 113.24 225.5 105.414 239.333 105.414"
                     stroke="#8979FF"
                 />
+
+                {/* Layered glowing animation trails */}
+                <g style={{ filter: "drop-shadow(0px 0px 2px #FFFFFF) drop-shadow(0px 0px 2px #8979FF)" }}>
+                    <path
+                        d="M18 108.284C31.8333 108.284 31.8333 93.192 45.6667 93.192C59.5 93.192 59.5 64.156 73.3333 64.156C87.1667 64.156 87.1667 9.5 101 9.5C114.833 9.5 114.833 62.882 128.667 62.882C142.5 62.882 142.5 129.214 156.333 129.214C170.167 129.214 170.167 25.698 184 25.698C197.833 25.698 197.833 113.24 211.667 113.24C225.5 113.24 225.5 105.414 239.333 105.414"
+                        stroke="#FFFFFF"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        pathLength="100"
+                        strokeDasharray="12 250"
+                        opacity="0.1"
+                        className="neon-path-0"
+                    />
+                    <path
+                        d="M18 108.284C31.8333 108.284 31.8333 93.192 45.6667 93.192C59.5 93.192 59.5 64.156 73.3333 64.156C87.1667 64.156 87.1667 9.5 101 9.5C114.833 9.5 114.833 62.882 128.667 62.882C142.5 62.882 142.5 129.214 156.333 129.214C170.167 129.214 170.167 25.698 184 25.698C197.833 25.698 197.833 113.24 211.667 113.24C225.5 113.24 225.5 105.414 239.333 105.414"
+                        stroke="#FFFFFF"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        pathLength="100"
+                        strokeDasharray="8 250"
+                        opacity="0.3"
+                        className="neon-path-1"
+                    />
+                    <path
+                        d="M18 108.284C31.8333 108.284 31.8333 93.192 45.6667 93.192C59.5 93.192 59.5 64.156 73.3333 64.156C87.1667 64.156 87.1667 9.5 101 9.5C114.833 9.5 114.833 62.882 128.667 62.882C142.5 62.882 142.5 129.214 156.333 129.214C170.167 129.214 170.167 25.698 184 25.698C197.833 25.698 197.833 113.24 211.667 113.24C225.5 113.24 225.5 105.414 239.333 105.414"
+                        stroke="#FFFFFF"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        pathLength="100"
+                        strokeDasharray="4 250"
+                        opacity="0.6"
+                        className="neon-path-2"
+                    />
+                    <path
+                        d="M18 108.284C31.8333 108.284 31.8333 93.192 45.6667 93.192C59.5 93.192 59.5 64.156 73.3333 64.156C87.1667 64.156 87.1667 9.5 101 9.5C114.833 9.5 114.833 62.882 128.667 62.882C142.5 62.882 142.5 129.214 156.333 129.214C170.167 129.214 170.167 25.698 184 25.698C197.833 25.698 197.833 113.24 211.667 113.24C225.5 113.24 225.5 105.414 239.333 105.414"
+                        stroke="#FFFFFF"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        pathLength="100"
+                        strokeDasharray="1.5 250"
+                        opacity="1"
+                        className="neon-path-3"
+                    />
+                </g>
             </g>
             <circle cx="18.0001" cy="108.284" r="3.5" fill="#8979FF" stroke="white" />
             <circle cx="45.6667" cy="93.1919" r="3.5" fill="#8979FF" stroke="white" />
@@ -269,18 +354,32 @@ function StudentProfileStack() {
         { name: "Fazlia Rahma", school: "Sixth Grade School", quote: "I want to study abroad!", color: "from-pink-400 to-rose-400", offset: "-translate-y-9", opacity: "opacity-60", scale: "scale-90" },
     ];
 
+    const loopedProfiles = [...profiles, ...profiles];
+    // animation-delay so each pill's scale peak aligns with it being at the container's center
+    // computed for: pill-height≈64px, mb-4=16px → 80px/item, container h-72=288px, center=144px, duration=18s
+    const PILL_DELAYS = ["2.7s", "7.2s", "-6.3s", "-1.8s"];
+
     return (
-        <div className="relative flex flex-col items-center w-full py-4">
-            {profiles.map((p, i) => (
-                <div key={i} className={`${i > 0 ? "-mt-8" : ""} ${p.opacity} ${p.scale} w-full max-w-55 rounded-2xl bg-white border border-grey-100 px-4 py-3 shadow-sm flex items-center gap-3 transition-all`} style={{ zIndex: i }}>
-                    {/* Avatar */}
-                    <div className={`w-10 h-10 rounded-full bg-linear-to-br ${p.color} shrink-0`} />
-                    <div className="min-w-0">
-                        <p className="text-sm font-bold text-grey-1200 truncate">{p.school}</p>
-                        <p className="text-xs text-grey-800 truncate">&quot;{p.quote}&quot;</p>
+        <div
+            className="relative w-full h-56 md:h-72 -my-6 ml-auto overflow-hidden"
+            style={{
+                marginRight: "-32px",
+                maskImage: "linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%)",
+            }}
+        >
+            <div className="flex flex-col animate-student-marquee">
+                {loopedProfiles.map((p, i) => (
+                    <div key={i} className="w-full max-w-55 rounded-2xl bg-white border border-grey-100 px-4 py-3 mb-4 shadow-sm flex items-center gap-3 animate-pill-scale" style={{ animationDelay: PILL_DELAYS[i % 4] }}>
+                        {/* Avatar */}
+                        <div className={`w-10 h-10 rounded-full bg-linear-to-br ${p.color} shrink-0`} />
+                        <div className="min-w-0">
+                            <p className="text-sm font-bold text-grey-1200 truncate">{p.school}</p>
+                            <p className="text-xs text-grey-800 truncate">&quot;{p.quote}&quot;</p>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 }
