@@ -6,6 +6,7 @@ import { DarkTruthSection } from "@/components/dark-truth-section";
 import { ProblemsSection } from "@/components/problems-section";
 import { PovertyCycleSection } from "@/components/poverty-cycle-section";
 import { WhatWeDoSection } from "@/components/what-we-do-section";
+import { BlogSection } from "@/components/blog-section";
 
 export default function Home() {
     return (
@@ -18,6 +19,7 @@ export default function Home() {
             <ProblemsSection />
             <PovertyCycleSection />
             <WhatWeDoSection />
+            <BlogSection />
         </div>
     );
 }
