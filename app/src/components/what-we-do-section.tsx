@@ -350,9 +350,9 @@ export function WhatWeDoSection() {
                                 <FeaturedCard activity={activity} />
 
                                 {/* Right — info + related images */}
-                                <div className="flex flex-col gap-4 justify-center">
+                                <div className="flex flex-col gap-2 md:gap-4 justify-center">
                                     {/* Tags */}
-                                    <div className="flex flex-wrap gap-2 mx-auto mb-0 md:mb-4">
+                                    <div className="flex flex-wrap gap-2 mx-0 md:mx-auto mb-0 md:mb-4">
                                         {activity.tags.map((tag) => (
                                             <span key={tag.label} className={`inline-block rounded-full px-4 py-1.5 text-xs font-medium ${tag.color}`}>
                                                 {tag.label}
@@ -361,7 +361,7 @@ export function WhatWeDoSection() {
                                     </div>
 
                                     {/* Title + description */}
-                                    <h3 className="text-2xl lg:text-3xl font-bold text-grey-1200 leading-tight mx-0 text-start md:text-center md:mx-auto">{activity.title}</h3>
+                                    <h3 className="text-2xl lg:text-3xl font-bold text-grey-1200 leading-tight mx-0 text-start mt-2 md:mt-0 md:text-center md:mx-auto">{activity.title}</h3>
                                     <p className="text-sm text-grey-800 leading-relaxed text-start md:text-center">{activity.description}</p>
 
                                     {/* Related images row */}
