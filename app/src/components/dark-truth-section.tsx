@@ -19,7 +19,11 @@ const mapPins = [
         label: "SD 2 Kalidadap",
         positionClasses: "left-[45%] top-[40%] md:left-[58%] md:top-[47%]",
         title: "GSP in SD 2 Kalidadap",
-        description: <>You&apos;re currently working solo on a draft. Move this to your projects so your team can edit the file, organize it, and more. You&apos;re currently working solo on a draft. Move this to your projects so your team can edit the file, organize it, and more.</>,
+        description: (
+            <>
+                SD N 2 Kalidadap serves around <b>47</b> students with only <b>7</b> employees. The school currently has <b>no internet access</b> and <b>no PC access</b>, which significantly limits digital learning opportunities and day-to-day educational administration.
+            </>
+        ),
     },
 ];
 
@@ -100,7 +104,7 @@ function StarIcon() {
 function GspBadge() {
     return (
         <div className="absolute top-12 left-1/2 -translate-x-1/2 md:top-24 md:left-27.5 xl:left-47.5 md:translate-x-8 min-w-50 inline-flex items-center gap-2 rounded-md bg-black px-4 py-2 border border-white/10 z-20">
-            <Image src="/icon/32.png" alt="Info icon" width={24} height={24} className="w-6 h-6 opacity-70" />
+            <Image src="/icon/32.png" alt="Info icon" width={24} height={24} className="w-6 h-6" />
             <span className="text-xs text-nowrap md:text-sm font-medium text-white tracking-wide">GSP Schools Location</span>
         </div>
     );
@@ -216,7 +220,7 @@ export function DarkTruthSection() {
                                                 <Info className="w-4 h-4" />
                                             </button>
                                         </TooltipTrigger>
-                                        <TooltipContent side="bottom" align="start" className="max-w-[300px] p-4 text-sm rounded-sm bg-white border border-gray-100 shadow-xl [&>svg]:fill-white [&>svg]:!bg-transparent">
+                                        <TooltipContent side="bottom" align="start" className="max-w-[300px] p-4 text-sm rounded-sm bg-white border border-gray-100 shadow-xl">
                                             <p className="font-semibold text-black/80 mb-1 font-sans">{pin.title}</p>
                                             <p className="text-black/80 leading-relaxed font-sans">{pin.description}</p>
                                         </TooltipContent>

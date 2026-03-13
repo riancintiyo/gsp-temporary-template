@@ -70,7 +70,7 @@ export function BlogSection() {
     };
 
     return (
-        <section className="w-full py-16 lg:py-24 bg-white font-sans">
+        <section className="w-full py-16 lg:pt-32 lg:pb-24 bg-white font-sans">
             <div className="mx-auto w-full max-w-360 px-8 lg:px-(--page-margin)">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-10 lg:mb-12">

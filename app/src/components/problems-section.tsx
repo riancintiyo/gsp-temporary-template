@@ -1,9 +1,13 @@
+"use client";
+
+import { motion } from "motion/react";
+
 export function ProblemsSection() {
     return (
         <section className="relative w-full py-16 lg:py-24 bg-white overflow-hidden font-sans">
             <div className="relative z-10 mx-auto w-full max-w-360 px-8 lg:px-(--page-margin)">
                 {/* Title */}
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-grey-1200 mb-6">The Problems in Wonosobo</h2>
+                <h2 className="text-4xl text-center md:text-start sm:text-5xl lg:text-6xl font-bold text-grey-1200 mb-6">The Problems in Wonosobo</h2>
 
                 {/* Intro paragraph */}
                 <p className="max-w-240 text-base text-grey-800 leading-relaxed mb-12 ml-2">
@@ -25,7 +29,7 @@ export function ProblemsSection() {
                     {/* Row 1 */}
                     <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4">
                         {/* Poverty + Chart card */}
-                        <div className="order-2 md:order-1 rounded-2xl flex flex-col-reverse md:flex-row border border-grey-100 bg-white p-6 gap-6 shadow-webflow-dropshadow">
+                        <motion.div whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 380, damping: 26 }} className="order-2 md:order-1 rounded-2xl flex flex-col-reverse md:flex-row border border-grey-100 bg-white p-6 gap-6 shadow-webflow-dropshadow">
                             {/* Text side */}
                             <div className="flex-1 min-w-0">
                                 <div className="relative z-10 flex flex-col gap-12">
@@ -35,8 +39,8 @@ export function ProblemsSection() {
                                     <div className="flex flex-col gap-2">
                                         <h3 className="text-lg font-bold text-grey-1200">Poverty</h3>
                                         <p className="text-sm text-grey-800 leading-relaxed">
-                                            In 2024, Wonosobo was ranked third as the poorest city in Central Java, with a total of <strong>15.28%</strong> or <strong>121.49 thousand people</strong> still living under poverty. One of the primary factor that contribute to this condition is lack of education, in which, this condition
-                                            can perpetuate poverty and hinder economic growth.
+                                            In 2024, Wonosobo was ranked third as the poorest city in Central Java, with a total of <strong>15.28%</strong> or <strong>121.49 thousand people</strong> still living under poverty. One of the primary factor that contribute to this condition is lack of
+                                            education, in which, this condition can perpetuate poverty and hinder economic growth.
                                         </p>
                                     </div>
                                 </div>
@@ -48,10 +52,12 @@ export function ProblemsSection() {
                                     <ChartLineSvg />
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Years of Schooling card — angular gradient + noise */}
-                        <div
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ type: "spring", stiffness: 380, damping: 26 }}
                             className="order-1 md:order-2 relative rounded-2xl opacity-90 border border-grey-100 overflow-hidden p-8 flex flex-col gap-4 shadow-webflow-dropshadow"
                             style={{
                                 background: "conic-gradient(from 230deg, rgba(214,199,255,0.9) 0deg, rgba(112,160,229,0.4) 22%, rgba(149,210,179,0.2) 46%, rgba(255,255,255,0.9) 63%, rgba(112,160,229,0.25) 78%, rgba(149,210,179,0.35) 90%, rgba(214,199,255,0.9) 100%)",
@@ -77,13 +83,15 @@ export function ProblemsSection() {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
 
                     {/* Row 2: HDI/IPM Index + Low Education Rate */}
                     <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4">
                         {/* HDI/IPM Index — gradient 2 + noise */}
-                        <div
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ type: "spring", stiffness: 380, damping: 26 }}
                             className="relative rounded-2xl opacity-95 border border-grey-100 overflow-hidden p-8 flex flex-col gap-4 shadow-webflow-dropshadow"
                             style={{
                                 background: "conic-gradient(from 230deg, rgba(112,160,229,0.9) 0deg, rgba(149,210,179,0.4) 22%, rgba(149,210,179,0.2) 46%, rgba(255,255,255,0.8) 63%, rgba(112,160,229,0.6) 78%, rgba(149,210,179,0.15) 90%, rgba(112,160,229,0.7) 100%)",
@@ -103,13 +111,15 @@ export function ProblemsSection() {
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <h3 className="text-xl font-bold text-grey-1200">HDI/IPM Index</h3>
-                                    <p className="text-sm text-grey-800 leading-relaxed">In 2023, Indonesia&apos;s HDI reached <strong>74.39</strong> and for Central Java the number decreased to <strong>73.39</strong>. However, for Wonosobo, the index only seized for <strong>69.37</strong> point.</p>
+                                    <p className="text-sm text-grey-800 leading-relaxed">
+                                        In 2023, Indonesia&apos;s HDI reached <strong>74.39</strong> and for Central Java the number decreased to <strong>73.39</strong>. However, for Wonosobo, the index only seized for <strong>69.37</strong> point.
+                                    </p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Low Education Rate + Student Profiles */}
-                        <div className="relative overflow-visible rounded-2xl flex flex-col-reverse md:flex-row border border-grey-100 bg-white p-6 gap-6 shadow-webflow-dropshadow">
+                        <motion.div whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 380, damping: 26 }} className="relative overflow-visible rounded-2xl flex flex-col-reverse md:flex-row border border-grey-100 bg-white p-6 gap-6 shadow-webflow-dropshadow">
                             <div className="relative z-10 flex flex-col gap-12">
                                 <div className="w-12 h-12 rounded-xl bg-[#638FF5] flex items-center justify-center">
                                     <BlueStarIcon />
@@ -117,13 +127,13 @@ export function ProblemsSection() {
                                 <div className="flex flex-col gap-2">
                                     <h3 className="text-xl font-bold text-grey-1200">Low Education Rate</h3>
                                     <p className="text-sm text-grey-800 leading-relaxed">
-                                        Only <strong>20.47%</strong> people above 15 years old in Wonosobo graduated from junior high school, the number decreased for high school level which only accounted for <strong>16.6%</strong> and then the number plummeted for they who graduated for university level with a mere of <strong>3.72%</strong> in
-                                        2022.
+                                        Only <strong>20.47%</strong> people above 15 years old in Wonosobo graduated from junior high school, the number decreased for high school level which only accounted for <strong>16.6%</strong> and then the number plummeted for they who graduated for university
+                                        level with a mere of <strong>3.72%</strong> in 2022.
                                     </p>
                                 </div>
                             </div>
                             <StudentProfileStack />
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </div>
@@ -134,13 +144,13 @@ export function ProblemsSection() {
 /* ---- Stat Card ---- */
 function StatCard({ icon, bgColor, value, label }: { icon: React.ReactNode; bgColor: string; value: string; label: string }) {
     return (
-        <div className="flex items-center gap-3 rounded-xl border border-grey-100 bg-white px-4 py-3 shadow-webflow-dropshadow">
+        <motion.div whileHover={{ scale: 1.06 }} transition={{ type: "spring", stiffness: 380, damping: 26 }} className="flex items-center gap-3 rounded-xl border border-grey-100 bg-white px-4 py-3 shadow-webflow-dropshadow">
             <div className={`w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center shrink-0`}>{icon}</div>
             <div className="min-w-0 flex flex-col gap-1">
                 <p className="text-lg font-bold text-grey-1200 leading-tight">{value}</p>
                 <p className="text-xs text-grey-800 leading-tight">{label}</p>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

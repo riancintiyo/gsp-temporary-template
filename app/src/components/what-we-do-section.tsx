@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Highlighter } from "@/components/ui/highlighter";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -206,15 +207,8 @@ function InnerImageCarousel({ images, currentIdx, onIdxChange }: { images: Activ
     return (
         <div className="relative w-full aspect-4/5 max-h-120 overflow-hidden rounded-2xl">
             <AnimatePresence initial={false}>
-                <motion.div
-                    key={currentIdx}
-                    initial={{ opacity: 0, scale: 1.07 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1 }}
-                    transition={{ duration: 0.75, ease: "easeOut" }}
-                    className="absolute inset-0"
-                >
-                    <Image src={images[currentIdx].src} alt={images[currentIdx].alt} fill className="object-cover" sizes="(max-width: 768px) 90vw, 50vw" />
+                <motion.div key={currentIdx} initial={{ opacity: 0, scale: 1.07 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1 }} transition={{ duration: 0.75, ease: "easeOut" }} className="absolute inset-0">
+                    <Image src={images[currentIdx].src} alt={images[currentIdx].alt} fill draggable={false} className="object-cover" sizes="(max-width: 768px) 90vw, 50vw" />
                 </motion.div>
             </AnimatePresence>
 
@@ -269,14 +263,7 @@ function FeaturedCard({ activity }: { activity: Activity }) {
                     <div className="flex items-center gap-2 mb-1">
                         <GspLogo className="w-8 h-8 shrink-0" />
                         <AnimatePresence mode="wait" initial={false}>
-                            <motion.h4
-                                key={innerIdx}
-                                initial={{ opacity: 0, y: 6 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -6 }}
-                                transition={{ duration: 0.35, ease: "easeOut" }}
-                                className="text-white font-bold text-base leading-tight"
-                            >
+                            <motion.h4 key={innerIdx} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.35, ease: "easeOut" }} className="text-white font-bold text-base leading-tight">
                                 {images[innerIdx].alt}
                             </motion.h4>
                         </AnimatePresence>
@@ -320,7 +307,11 @@ export function WhatWeDoSection() {
                 {/* Section header */}
                 <div className="flex items-center gap-3 mb-10 lg:mb-14">
                     <FlowerIcon className="w-14 h-14 lg:w-20 lg:h-20 -mt-1" />
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-grey-1200 leading-tight">What We Do</h2>
+                    <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-grey-1200 leading-tight">
+                        <Highlighter action="highlight" color="#FFFFFF">
+                            What We Do
+                        </Highlighter>
+                    </h2>
                 </div>
 
                 {/* Carousel viewport */}
@@ -368,7 +359,7 @@ export function WhatWeDoSection() {
                                     <div className="md:flex gap-3 overflow-x-auto pb-1 mt-0 md:mt-6 hidden">
                                         {activity.relatedImages.map((img, i) => (
                                             <div key={i} className="relative w-36 lg:w-60 shrink-0 aspect-4/5 rounded-2xl overflow-hidden shadow-webflow-dropshadow">
-                                                <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="420px" />
+                                                <Image src={img.src} alt={img.alt} fill draggable={false} className="object-cover" sizes="420px" />
                                                 {/* Mini overlay */}
                                                 <div className="absolute top-3 left-3 right-3 flex gap-1.5 z-10">
                                                     {activity.tags.slice(0, 2).map((t) => (
