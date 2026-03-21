@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { motion } from "motion/react";
+import { LazyImage } from "@/components/ui/lazy-image";
 
 /**
  * Bento-style grid for the hero section right panel.
@@ -97,14 +97,7 @@ function PhotoCard({ label }: { label: string }) {
 
     return (
         <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-[#95D2B3]/20 via-[#D6C7FF]/20 to-[#638FF5]/30 h-full min-h-40 flex items-center justify-center">
-            {src ? (
-                <Image
-                    src={src}
-                    alt={label}
-                    fill
-                    className="absolute inset-0 h-full w-full object-cover"
-                />
-            ) : null}
+            {src ? <LazyImage src={src} alt={label} fill sizes="(max-width: 768px) 100vw, 200px" className="absolute inset-0 h-full w-full object-cover" /> : null}
             <span className="relative z-10 text-xs font-medium text-grey-600 opacity-50 select-none">{label}</span>
         </div>
     );
@@ -194,22 +187,22 @@ function DarkCard() {
                     <PulsingCircle cx={565} cy={-10} delay={6.0} />
 
                     {/* Text labels */}
-                    <text x="10" y="-25" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="10" y="-25" fill="white" className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Problems
                     </text>
-                    <text x="100" y="-25" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="100" y="-25" fill="white" className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Understand
                     </text>
-                    <text x="210" y="-4" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="210" y="-4" fill="white" className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Define Point of View
                     </text>
-                    <text x="332" y="-26" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="332" y="-26" fill="white" className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Develop Idea
                     </text>
-                    <text x="457" y="0" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="457" y="0" fill="white" className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Build
                     </text>
-                    <text x="555" y="-26" fill="white"  className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
+                    <text x="555" y="-26" fill="white" className="text-[14px] md:text-[12px]" fontFamily="Plus Jakarta Sans, sans-serif" opacity="0.8">
                         Test
                     </text>
                 </svg>

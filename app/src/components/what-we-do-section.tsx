@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import Image from "next/image";
+import type { ComponentType, SVGProps } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Microscope, Volleyball, Atom, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { Highlighter } from "@/components/ui/highlighter";
+import { LazyImage } from "@/components/ui/lazy-image";
+import { TextAnimate } from "@/components/ui/text-animate";
+import { FadeIn } from "@/components/ui/fade-in";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -13,6 +16,7 @@ import { Highlighter } from "@/components/ui/highlighter";
 interface ActivityImage {
     src: string;
     alt: string;
+    related_desc?: string;
 }
 
 interface Activity {
@@ -20,45 +24,82 @@ interface Activity {
     description: string;
     date: string;
     tags: { label: string; color: string }[];
+    icon?: string;
     images: ActivityImage[];
-    relatedImages: ActivityImage[];
 }
 
 const activities: Activity[] = [
     {
-        title: "Sport Friday",
-        description: "There is no dedicated sport teacher at SDN 1 Kalidadap, therefore we decided to step up and share our knowledge about something that I passionate about.",
-        date: "01 November 2024",
+        title: "Practical Science Workshop",
+        description: "As the core focus of our STEAM program — dividing theory and practice 40% and 60% respectively — we organized a hands-on general science workshop where students actively engaged in experiments and activities to deepen their understanding of scientific concepts.",
+        date: "08 November 2024",
         tags: [
+            { label: "Math", color: "bg-primary-blue text-white" },
             { label: "Science", color: "bg-primary-green text-white" },
-            { label: "Sports", color: "bg-grey-300 text-grey-1200" },
         ],
+        icon: "Microscope",
         images: [
-            { src: "/img/poster-1.webp", alt: "Playing Catch Ball" },
-            { src: "/img/poster-2.webp", alt: "Activity photo 2" },
-            { src: "/img/poster-1.webp", alt: "Activity photo 3" },
-        ],
-        relatedImages: [
-            { src: "/img/poster-2.webp", alt: "Crafting Water Rocket" },
-            { src: "/img/poster-1.webp", alt: "Climbing wall" },
+            { src: "/img/gsp/image-4.png", alt: "Rocket Water Experiment", related_desc: "Practical example of Newton's III laws in action." },
+            { src: "/img/gsp/4.webp", alt: "Pre and Post Test Measurement", related_desc: "Measurement of students' understanding before and after the program." },
+            { src: "/img/gsp/image-8.jpg", alt: "Rocket Creation", related_desc: "Students building and launching their own rockets." },
+            { src: "/img/gsp/image-1.png", alt: "Post Project Documentation", related_desc: "Documentation of the project's outcomes and student reflections." },
         ],
     },
     {
-        title: "STEAM Learning",
-        description: "Implementing project-based STEAM learning to encourage critical thinking and creativity among students in rural areas.",
-        date: "15 December 2024",
+        title: "Sport Friday",
+        description: "Since the school doesn’t have a sports teacher, we decided to step in and create a fun Sport Day for the students. It’s a chance for them to play, move, and enjoy learning outside the classroom.",
+        date: "02 November 2024",
+        tags: [{ label: "Sports", color: "bg-primary-purple text-white" }],
+        icon: "Volleyball",
+        images: [
+            { src: "/img/gsp/12.webp", alt: "Boxing Pad Training", related_desc: "Students practicing boxing techniques on pads." },
+            { src: "/img/gsp/8.webp", alt: "Gathering Together", related_desc: "Students gathering together to start their workout session." },
+            { src: "/img/gsp/image-15.jpg", alt: "Hand Wrap Demo", related_desc: "Demonstration of proper hand wrapping techniques for boxing." },
+        ],
+    },
+    {
+        title: "What is Engineering?",
+        description: "Introduction to software engineering concepts through block-based coding activities, fostering creativity and problem-solving skills in a fun and interactive way.",
+        date: "15 November 2024",
         tags: [
-            { label: "Science", color: "bg-primary-green text-white" },
-            { label: "Math", color: "bg-primary-purple text-white" },
+            { label: "Math", color: "bg-primary-green text-white" },
             { label: "Engineering", color: "bg-primary-blue text-white" },
         ],
+        icon: "Atom",
         images: [
-            { src: "/img/poster-2.webp", alt: "STEAM activity 1" },
-            { src: "/img/poster-1.webp", alt: "STEAM activity 2" },
+            { src: "/img/gsp/image-14.jpg", alt: "Introduction to Logic Based Concept", related_desc: "Block code as a tool for learning logic and problem-solving." },
+            { src: "/img/gsp/image-13.png", alt: "Logic Based Concept Part 2", related_desc: "Showing the students about implementation of logic-based concepts." },
+            { src: "/img/gsp/poster-13.png", alt: "How Computers Work", related_desc: "Concept of binary numbers and how computers process information." },
         ],
-        relatedImages: [
-            { src: "/img/poster-1.webp", alt: "Related STEAM 1" },
-            { src: "/img/poster-2.webp", alt: "Related STEAM 2" },
+    },
+    {
+        title: "Nutrition Workshop",
+        description: "10 Steps to Balanced Nutrition: A Guide to Healthy Eating Habits for Kids. This workshop covers essential nutrition principles, practical tips for meal planning, and fun activities to encourage healthy eating habits among children.",
+        date: "22 November 2024",
+        tags: [
+            { label: "Nutrition", color: "bg-primary-yellow text-white" },
+            { label: "Health", color: "bg-primary-green text-white" },
+        ],
+        icon: "Atom",
+        images: [
+            { src: "/img/gsp/6.webp", alt: "Nutrition Sharing from SME", related_desc: "Explaining about balanced nutrition and healthy eating habits." },
+            { src: "/img/gsp/image-12.jpg", alt: "Healthy Breakfast", related_desc: "Providing meals for students that align with balanced nutrition principles." },
+            { src: "/img/gsp/2.png", alt: "Introduction to Balanced Nutrition", related_desc: "Visual representation of balanced nutrition principles." },
+        ],
+    },
+    {
+        title: "Road to Medical School",
+        description: "What does it take to become a doctor? This session provides an overview of the medical school journey, including the necessary education, skills, and experiences needed to pursue a career in medicine.",
+        date: "29 November 2024",
+        tags: [
+            { label: "Biology", color: "bg-primary-purple text-white" },
+            { label: "Math", color: "bg-primary-yellow text-white" },
+        ],
+        icon: "Atom",
+        images: [
+            { src: "/img/gsp/5.webp", alt: "Road to Medical School", related_desc: "Overview of the medical school journey and necessary steps to become a doctor." },
+            { src: "/img/gsp/2.jpg", alt: "Medical School Journey", related_desc: "Detailed look into the various stages of medical education and training." },
+            { src: "/img/gsp/7.webp", alt: "Becoming a Doctor", related_desc: "Highlighting the skills and experiences needed to pursue a career in medicine." },
         ],
     },
 ];
@@ -187,14 +228,18 @@ function FlowerIcon({ className }: { className?: string }) {
     );
 }
 
-function GspLogo({ className }: { className?: string }) {
+const IconMap: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
+    Microscope,
+    Volleyball,
+    Atom,
+    User,
+};
+
+function GspLogo({ className, iconName }: { className?: string; iconName?: string }) {
+    const IconComp = iconName && IconMap[iconName] ? IconMap[iconName] : User;
     return (
         <div className={`flex items-center justify-center rounded-lg bg-primary-blue/90 ${className}`}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="10" r="5" stroke="white" strokeWidth="1.5" fill="none" />
-                <path d="M8 14c0 2.5 2 4 4 4s4-1.5 4-4" stroke="white" strokeWidth="1.5" fill="none" />
-                <circle cx="10" cy="9" r="1" fill="white" />
-            </svg>
+            <IconComp className="w-4 h-4 text-white" />
         </div>
     );
 }
@@ -205,17 +250,17 @@ function GspLogo({ className }: { className?: string }) {
 
 function InnerImageCarousel({ images, currentIdx, onIdxChange }: { images: ActivityImage[]; currentIdx: number; onIdxChange: (i: number) => void }) {
     return (
-        <div className="relative w-full aspect-4/5 max-h-120 overflow-hidden rounded-2xl">
+        <div className="relative w-full h-full overflow-hidden rounded-2xl">
             <AnimatePresence initial={false}>
-                <motion.div key={currentIdx} initial={{ opacity: 0, scale: 1.07 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1 }} transition={{ duration: 0.75, ease: "easeOut" }} className="absolute inset-0">
-                    <Image src={images[currentIdx].src} alt={images[currentIdx].alt} fill draggable={false} className="object-cover" sizes="(max-width: 768px) 90vw, 50vw" />
+                <motion.div key={currentIdx} initial={{ opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1 }} transition={{ duration: 0.75, ease: "easeOut" }} className="absolute inset-0">
+                    <LazyImage src={images[currentIdx].src} alt={images[currentIdx].alt} fill draggable={false} className="object-cover w-full h-full" sizes="(max-width: 720px) 80vw, 40vw" />
                 </motion.div>
             </AnimatePresence>
 
             {/* Dot indicators */}
             <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-2 z-10">
                 {images.map((_, i) => (
-                    <button key={i} onClick={() => onIdxChange(i)} aria-label={`Go to image ${i + 1}`} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentIdx ? "bg-white w-5" : "bg-white/50"}`} />
+                    <button key={i} onClick={() => onIdxChange(i)} aria-label={`Go to image ${i + 1}`} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentIdx ? "bg-white w-5" : "bg-white/80"}`} />
                 ))}
             </div>
         </div>
@@ -229,21 +274,22 @@ function InnerImageCarousel({ images, currentIdx, onIdxChange }: { images: Activ
 const AUTOPLAY_INTERVAL = 6500;
 
 function FeaturedCard({ activity }: { activity: Activity }) {
-    const images = activity.relatedImages;
+    const images = activity.images;
     const [innerIdx, setInnerIdx] = useState(0);
 
     // Autoplay
     useEffect(() => {
         const timer = setInterval(() => {
+            if (images.length === 0) return;
             setInnerIdx((prev) => (prev + 1) % images.length);
         }, AUTOPLAY_INTERVAL);
         return () => clearInterval(timer);
     }, [images.length]);
 
     return (
-        <div className="relative flex flex-col rounded-2xl overflow-hidden bg-grey-1200 shadow-webflow-dropshadow max-h-130">
+        <div className="relative flex flex-col rounded-2xl overflow-hidden bg-grey-1200 shadow-webflow-dropshadow">
             {/* Image area with inner carousel */}
-            <div className="relative">
+            <div className="relative w-full aspect-4/5">
                 <InnerImageCarousel images={images} currentIdx={innerIdx} onIdxChange={setInnerIdx} />
 
                 {/* Overlay: tags + date */}
@@ -261,14 +307,14 @@ function FeaturedCard({ activity }: { activity: Activity }) {
                 {/* Overlay: title + description at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/70 via-black/40 to-transparent px-5 pb-5 pt-16 z-10">
                     <div className="flex items-center gap-2 mb-1">
-                        <GspLogo className="w-8 h-8 shrink-0" />
+                        <GspLogo className="w-7 h-7 shrink-0" iconName={activity.icon} />
                         <AnimatePresence mode="wait" initial={false}>
                             <motion.h4 key={innerIdx} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.35, ease: "easeOut" }} className="text-white font-bold text-base leading-tight">
                                 {images[innerIdx].alt}
                             </motion.h4>
                         </AnimatePresence>
                     </div>
-                    <p className="text-white/80 text-sm leading-relaxed">{activity.description.slice(0, 60)}…</p>
+                    <p className="text-white/80 text-sm leading-relaxed text-wrap max-w-120 truncate">{images[innerIdx]?.related_desc ?? activity.description}</p>
                 </div>
             </div>
         </div>
@@ -308,14 +354,16 @@ export function WhatWeDoSection() {
                 <div className="flex items-center gap-3 mb-10 lg:mb-14">
                     <FlowerIcon className="w-14 h-14 lg:w-20 lg:h-20 -mt-1" />
                     <h2 className="text-4xl sm:text-5xl lg:text-5xl font-bold text-grey-1200 leading-tight">
-                        <Highlighter action="highlight" color="#FFFFFF">
-                            What We Do
+                        <Highlighter action="highlight" color="#FFFFFF" isView startDelay={450}>
+                            <TextAnimate as="span" by="line" animation="fadeIn" startOnView>
+                                {`What We Do`}
+                            </TextAnimate>
                         </Highlighter>
                     </h2>
                 </div>
 
                 {/* Carousel viewport */}
-                <div className="relative">
+                <FadeIn startOnView delay={0.12} duration={0.5} y={12} className="relative">
                     <AnimatePresence mode="popLayout" initial={false} custom={direction}>
                         <motion.div
                             key={page}
@@ -356,10 +404,10 @@ export function WhatWeDoSection() {
                                     <p className="text-sm text-grey-800 leading-relaxed text-start md:text-center">{activity.description}</p>
 
                                     {/* Related images row */}
-                                    <div className="md:flex gap-3 overflow-x-auto pb-1 mt-0 md:mt-6 hidden">
-                                        {activity.relatedImages.map((img, i) => (
+                                    <div className="md:flex gap-3 overflow-x-auto pb-1 mt-0 md:mt-6 hidden thin-scrollbar">
+                                        {activity.images.map((img, i) => (
                                             <div key={i} className="relative w-36 lg:w-60 shrink-0 aspect-4/5 rounded-2xl overflow-hidden shadow-webflow-dropshadow">
-                                                <Image src={img.src} alt={img.alt} fill draggable={false} className="object-cover" sizes="420px" />
+                                                <LazyImage src={img.src} alt={img.alt} fill draggable={false} className="object-cover w-full h-full" sizes="420px" />
                                                 {/* Mini overlay */}
                                                 <div className="absolute top-3 left-3 right-3 flex gap-1.5 z-10">
                                                     {activity.tags.slice(0, 2).map((t) => (
@@ -371,10 +419,10 @@ export function WhatWeDoSection() {
                                                 </div>
                                                 <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent px-3 pb-3 pt-8 z-10">
                                                     <div className="flex items-center gap-1.5 mb-0.5">
-                                                        <GspLogo className="w-5 h-5 shrink-0" />
+                                                        <GspLogo className="w-6 h-6 shrink-0" iconName={activity.icon} />
                                                         <span className="text-white text-xs font-bold leading-tight">{img.alt}</span>
                                                     </div>
-                                                    <p className="text-white/70 text-[10px] leading-snug">Creating rocket to implement STEAM learning at class.</p>
+                                                    <p className="text-white/70 text-[10px] leading-snug">{img.related_desc ?? img.alt}</p>
                                                 </div>
                                             </div>
                                         ))}
@@ -400,7 +448,7 @@ export function WhatWeDoSection() {
                             <ChevronRight className="w-5 h-5" />
                         </button>
                     </div>
-                </div>
+                </FadeIn>
             </div>
         </section>
     );

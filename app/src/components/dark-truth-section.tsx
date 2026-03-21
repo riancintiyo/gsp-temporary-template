@@ -1,6 +1,7 @@
-import Image from "next/image";
 import { Info } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { LazyImage } from "@/components/ui/lazy-image";
+import { RevealOnView } from "@/components/ui/reveal-on-view";
 
 const mapPins = [
     {
@@ -104,7 +105,7 @@ function StarIcon() {
 function GspBadge() {
     return (
         <div className="absolute top-12 left-1/2 -translate-x-1/2 md:top-24 md:left-27.5 xl:left-47.5 md:translate-x-8 min-w-50 inline-flex items-center gap-2 rounded-md bg-black px-4 py-2 border border-white/10 z-20">
-            <Image src="/icon/32.png" alt="Info icon" width={24} height={24} className="w-6 h-6" />
+            <LazyImage src="/icon/32.png" alt="Info icon" width={24} height={24} className="w-6 h-6" />
             <span className="text-xs text-nowrap md:text-sm font-medium text-white tracking-wide">GSP Schools Location</span>
         </div>
     );
@@ -148,7 +149,7 @@ function BgSvgMap() {
     return (
         <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 md:top-20 md:-bottom-20 z-0">
             <div className="relative w-full h-full">
-                <Image src="/img/gradient-blob.webp" alt="Section glow" fill priority className="object-cover" />
+                <LazyImage src="/img/gradient-blob.webp" alt="" fill className="object-cover" />
             </div>
         </div>
     );
@@ -162,74 +163,78 @@ export function DarkTruthSection() {
 
             <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-[var(--page-margin)]">
                 {/* Main rounded container */}
-                <div className="relative w-full rounded-[18px] overflow-hidden flex flex-col-reverse md:flex-col md:flex-row bg-[#111215] border border-gray-300 shadow-webflow-dropshadow">
-                    {/* Left Column: Text Content */}
-                    <div className="relative flex-1 p-8 md:p-12 lg:p-20 flex flex-col justify-center max-w-[700px] z-10">
-                        {/* Grid on the left background */}
-                        <BlueGridPattern />
+                <RevealOnView y={0} scaleFrom={0.86} followScroll scrollEnd={0.55} duration={0.18} threshold={0} rootMargin="0px" className="origin-center">
+                    <div className="relative w-full rounded-[18px] overflow-hidden flex flex-col-reverse md:flex-row bg-[#111215] border border-gray-300 shadow-webflow-dropshadow">
+                        {/* Left Column: Text Content */}
+                        <div className="relative flex-1 p-8 md:p-12 lg:p-20 flex flex-col justify-center max-w-[700px] z-10">
+                            {/* Grid on the left background */}
+                            <BlueGridPattern />
 
-                        <div className="relative z-10">
-                            {/* Headline */}
-                            <h2 className="flex items-center gap-4 text-4xl sm:text-5xl lg:text-5xl font-bold text-white mb-8">
-                                <StarIcon />
-                                The Dark Truth
-                            </h2>
+                            <div className="relative z-10">
+                                {/* Headline */}
+                                <h2 className="flex items-center gap-4 text-4xl sm:text-5xl lg:text-5xl font-bold text-white mb-8">
+                                    <StarIcon />
+                                    The Dark Truth
+                                </h2>
 
-                            {/* Paragraphs */}
-                            <div className="space-y-6 text-[#A0AAB4] text-base md:text-[17px] leading-relaxed">
-                                <p>
-                                    Wonosobo might be famous for its stunning natural gem, Dieng Plateau—where tourists go to enjoy cool weather, ancient temples, and misty mountains—but not many people realize <span className="font-semibold text-white">Dieng</span> is actually part of{" "}
-                                    <span className="font-semibold text-white">Wonosobo</span>. While the scenery draws praise and visitors, few know that behind all the beauty, Wonosobo is facing serious education challenges that have quietly held back its young generation for years.
-                                </p>
-                                <p>
-                                    The numbers are worrying: most students in Wonosobo only finish up to middle school, and only a tiny percentage ever reach college. Limited access to quality education means many kids miss out on learning the skills that could open doors to better
-                                    futures—especially in <span className="font-semibold text-white">STEAM</span> (Science, Technology, Engineering, Arts, and Math) fields. Coupled with early school dropouts and youth marriages, particularly among girls, the cycle of poverty and low-skilled
-                                    employment persists.
-                                </p>
+                                {/* Paragraphs */}
+                                <div className="space-y-6 text-[#A0AAB4] text-base md:text-[17px] leading-relaxed">
+                                    <p>
+                                        Wonosobo might be famous for its stunning natural gem, Dieng Plateau—where tourists go to enjoy cool weather, ancient temples, and misty mountains—but not many people realize <span className="font-semibold text-white">Dieng</span> is actually part of{" "}
+                                        <span className="font-semibold text-white">Wonosobo</span>. While the scenery draws praise and visitors, few know that behind all the beauty, Wonosobo is facing serious education challenges that have quietly held back its young generation for years.
+                                    </p>
+                                    <p>
+                                        The numbers are worrying: most students in Wonosobo only finish up to middle school, and only a tiny percentage ever reach college. Limited access to quality education means many kids miss out on learning the skills that could open doors to better
+                                        futures—especially in <span className="font-semibold text-white">STEAM</span> (Science, Technology, Engineering, Arts, and Math) fields. This is why the <span className="font-semibold text-white">General Science Program</span>—a dedicated STEAM science
+                                        program—was created to address this gap. Coupled with early school dropouts and youth marriages, particularly among girls, the cycle of poverty and low-skilled employment persists.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right Column: Map Image */}
+                        <div className="relative flex-1 min-h-[400px] md:min-h-[600px] w-full bg-[#E8EAEF] overflow-hidden group">
+                            {/* Gradient mask to blend map with black bg */}
+                            <div className="absolute top-0 left-0 w-[10%] h-full bg-linear-to-r from-[#3e3f41] to-transparent z-10 opacity-45 hidden md:block" />
+
+                            {/* Map Image */}
+                            <div className="absolute inset-0 w-full h-[120%] -top-[21%] object-cover opacity-60">
+                                {/* Using next image with some scale to match design perspective */}
+                                <LazyImage src="/img/kalidadap-map.webp" alt="Kalidadap Map" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover scale-110 origin-center" />
+                            </div>
+
+                            {/* White faded overlay on map to match design */}
+                            <div className="absolute inset-0 bg-white/40 mix-blend-overlay z-[5]" />
+
+                            <GspBadge />
+
+                            {/* Map Pins and Route */}
+                            <div className="absolute inset-0 z-20">
+                                {/* Route SVG connecting pins */}
+                                <RouteLine />
+
+                                {mapPins.map((pin) => (
+                                    <TooltipProvider key={pin.id} delayDuration={100}>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <button
+                                                    className={`absolute ${pin.positionClasses} bg-white border border-gray-200 rounded-md py-2 px-4 text-xs md:text-sm font-medium text-gray-800 shadow-webflow-dropshadow flex items-center gap-1.5 transition-transform hover:scale-105 z-30 group/pin`}
+                                                >
+                                                    {pin.label}
+                                                    <Info className="w-4 h-4" />
+                                                </button>
+                                            </TooltipTrigger>
+                                            <TooltipContent side="bottom" align="start" className="max-w-[300px] p-4 text-sm rounded-sm bg-white border border-gray-100 shadow-xl">
+                                                <p className="font-semibold text-black/80 mb-1 font-sans">{pin.title}</p>
+                                                <p className="text-black/80 leading-relaxed font-sans">{pin.description}</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                ))}
                             </div>
                         </div>
                     </div>
-
-                    {/* Right Column: Map Image */}
-                    <div className="relative flex-1 min-h-[400px] md:min-h-[600px] w-full bg-[#E8EAEF] overflow-hidden group">
-                        {/* Gradient mask to blend map with black bg */}
-                        <div className="absolute top-0 left-0 w-[10%] h-full bg-linear-to-r from-[#3e3f41] to-transparent z-10 opacity-45 hidden md:block" />
-
-                        {/* Map Image */}
-                        <div className="absolute inset-0 w-full h-[120%] -top-[21%] object-cover opacity-60">
-                            {/* Using next image with some scale to match design perspective */}
-                            <Image src="/img/kalidadap-map.webp" alt="Kalidadap Map" fill className="object-cover scale-110 origin-center" priority />
-                        </div>
-
-                        {/* White faded overlay on map to match design */}
-                        <div className="absolute inset-0 bg-white/40 mix-blend-overlay z-[5]" />
-
-                        <GspBadge />
-
-                        {/* Map Pins and Route */}
-                        <div className="absolute inset-0 z-20">
-                            {/* Route SVG connecting pins */}
-                            <RouteLine />
-
-                            {mapPins.map((pin) => (
-                                <TooltipProvider key={pin.id} delayDuration={100}>
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                                            <button className={`absolute ${pin.positionClasses} bg-white border border-gray-200 rounded-md py-2 px-4 text-xs md:text-sm font-medium text-gray-800 shadow-webflow-dropshadow flex items-center gap-1.5 transition-transform hover:scale-105 z-30 group/pin`}>
-                                                {pin.label}
-                                                <Info className="w-4 h-4" />
-                                            </button>
-                                        </TooltipTrigger>
-                                        <TooltipContent side="bottom" align="start" className="max-w-[300px] p-4 text-sm rounded-sm bg-white border border-gray-100 shadow-xl">
-                                            <p className="font-semibold text-black/80 mb-1 font-sans">{pin.title}</p>
-                                            <p className="text-black/80 leading-relaxed font-sans">{pin.description}</p>
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TooltipProvider>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                </RevealOnView>
             </div>
         </section>
     );

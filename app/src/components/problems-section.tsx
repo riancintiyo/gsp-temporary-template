@@ -1,27 +1,28 @@
 "use client";
 
 import { motion } from "motion/react";
+import { TextAnimate } from "@/components/ui/text-animate";
 
 export function ProblemsSection() {
     return (
         <section className="relative w-full py-16 lg:py-24 bg-white overflow-hidden font-sans">
             <div className="relative z-10 mx-auto w-full max-w-360 px-8 lg:px-(--page-margin)">
                 {/* Title */}
-                <h2 className="text-4xl text-center md:text-start sm:text-5xl lg:text-6xl font-bold text-grey-1200 mb-6">The Problems in Wonosobo</h2>
+                <TextAnimate as="h2" by="line" animation="fadeIn" startOnView once className="text-4xl text-center md:text-start sm:text-5xl lg:text-6xl font-bold text-grey-1200 mb-6">
+                    {`The Problems in Wonosobo`}
+                </TextAnimate>
 
                 {/* Intro paragraph */}
-                <p className="max-w-240 text-base text-grey-800 leading-relaxed mb-12 ml-2">
-                    The 2022 <strong className="font-bold text-grey-1200">UNDP&apos;s</strong> <strong className="font-bold text-grey-1200">Human Development Index</strong> <strong className="font-bold text-grey-1200">(HDI)</strong> stated that Indonesia was ranked 6th in Southeast Asia, with an
-                    average of only <strong className="font-bold text-grey-1200">8.6 years</strong> of schooling. In <strong className="font-bold text-grey-1200">Wonosobo</strong>, Central Java, the mean years of schooling in 2023 was only{" "}
-                    <strong className="font-bold text-grey-1200">6.88 years</strong>, where the rate of students who continued their study to junior high school was only around <strong className="font-bold text-grey-1200">40%</strong>.
-                </p>
+                <TextAnimate as="p" by="line" animation="fadeIn" startOnView once delay={0.08} className="max-w-240 text-base text-grey-800 leading-relaxed mb-12 ml-2">
+                    {`The 2022 UNDP's Human Development Index (HDI) stated that Indonesia was ranked 6th in Southeast Asia, with an average of only 8.6 years of schooling. In Wonosobo, Central Java, the mean years of schooling in 2023 was only 6.88 years, where the rate of students who continued their study to junior high school was only around 40%.`}
+                </TextAnimate>
 
                 {/* Stat cards row */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                    <StatCard icon={<GreenFlowerIcon />} bgColor="bg-[#95D2B3]" value="15.28%" label="Living Under Poverty" />
-                    <StatCard icon={<PurpleFlowerIcon />} bgColor="bg-[#D6C7FF]" value="6.88 Years" label="Years of Schooling" />
-                    <StatCard icon={<YellowStarIcon />} bgColor="bg-[#FBBF24]" value="69.37" label="HDI Index" />
-                    <StatCard icon={<BlueStarIcon />} bgColor="bg-[#638FF5]" value="Rank 3th" label="Poorest City in Central Java" />
+                    <StatCard icon={<GreenFlowerIcon />} bgColor="bg-[#95D2B3]" value="15.28%" label="Living Under Poverty" delay={0.18} />
+                    <StatCard icon={<PurpleFlowerIcon />} bgColor="bg-[#D6C7FF]" value="6.88 Years" label="Years of Schooling" delay={0.24} />
+                    <StatCard icon={<YellowStarIcon />} bgColor="bg-[#FBBF24]" value="69.37" label="HDI Index" delay={0.3} />
+                    <StatCard icon={<BlueStarIcon />} bgColor="bg-[#638FF5]" value="Rank 3rd" label="Poorest City in Central Java" delay={0.36} />
                 </div>
 
                 {/* Bento grid — 2 rows */}
@@ -37,11 +38,12 @@ export function ProblemsSection() {
                                         <GreenFlowerIcon />
                                     </div>
                                     <div className="flex flex-col gap-2">
-                                        <h3 className="text-lg font-bold text-grey-1200">Poverty</h3>
-                                        <p className="text-sm text-grey-800 leading-relaxed">
-                                            In 2024, Wonosobo was ranked third as the poorest city in Central Java, with a total of <strong>15.28%</strong> or <strong>121.49 thousand people</strong> still living under poverty. One of the primary factor that contribute to this condition is lack of
-                                            education, in which, this condition can perpetuate poverty and hinder economic growth.
-                                        </p>
+                                        <TextAnimate as="h3" by="line" animation="fadeIn" startOnView once delay={0.44} className="text-lg font-bold text-grey-1200">
+                                            {`Poverty`}
+                                        </TextAnimate>
+                                        <TextAnimate as="p" by="line" animation="fadeIn" startOnView once delay={0.5} className="text-sm text-grey-800 leading-relaxed">
+                                            {`In 2024, Wonosobo was ranked third as the poorest city in Central Java, with a total of 15.28% or 121.49 thousand people still living under poverty. One of the primary factor that contribute to this condition is lack of education, in which, this condition can perpetuate poverty and hinder economic growth.`}
+                                        </TextAnimate>
                                     </div>
                                 </div>
                             </div>
@@ -76,11 +78,12 @@ export function ProblemsSection() {
                                     <PurpleFlowerIcon />
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <h3 className="text-xl font-bold text-grey-1200">Years of Schooling</h3>
-                                    <p className="text-sm text-grey-800 leading-relaxed">
-                                        In <strong className="font-bold text-grey-1200">Wonosobo</strong>, Central Java, the mean years of schooling in 2023 was only <strong className="font-bold text-grey-1200">6.88 years</strong>. The region&apos;s and Central Java&apos;s mean years of schooling
-                                        are <strong className="font-bold text-grey-1200">8.7 years</strong> and <strong className="font-bold text-grey-1200">8.01 years</strong> respectively.
-                                    </p>
+                                    <TextAnimate as="h3" by="line" animation="fadeIn" startOnView once delay={0.56} className="text-xl font-bold text-grey-1200">
+                                        {`Years of Schooling`}
+                                    </TextAnimate>
+                                    <TextAnimate as="p" by="line" animation="fadeIn" startOnView once delay={0.62} className="text-sm text-grey-800 leading-relaxed">
+                                        {`In Wonosobo, Central Java, the mean years of schooling in 2023 was only 6.88 years. The region's and Central Java's mean years of schooling are 8.7 years and 8.01 years respectively.`}
+                                    </TextAnimate>
                                 </div>
                             </div>
                         </motion.div>
@@ -110,10 +113,12 @@ export function ProblemsSection() {
                                     <YellowStarIcon />
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <h3 className="text-xl font-bold text-grey-1200">HDI/IPM Index</h3>
-                                    <p className="text-sm text-grey-800 leading-relaxed">
-                                        In 2023, Indonesia&apos;s HDI reached <strong>74.39</strong> and for Central Java the number decreased to <strong>73.39</strong>. However, for Wonosobo, the index only seized for <strong>69.37</strong> point.
-                                    </p>
+                                    <TextAnimate as="h3" by="line" animation="fadeIn" startOnView once delay={0.68} className="text-xl font-bold text-grey-1200">
+                                        {`HDI/IPM Index`}
+                                    </TextAnimate>
+                                    <TextAnimate as="p" by="line" animation="fadeIn" startOnView once delay={0.74} className="text-sm text-grey-800 leading-relaxed">
+                                        {`In 2023, Indonesia's HDI reached 74.39 and for Central Java the number decreased to 73.39. However, for Wonosobo, the index only seized for 69.37 point.`}
+                                    </TextAnimate>
                                 </div>
                             </div>
                         </motion.div>
@@ -125,11 +130,12 @@ export function ProblemsSection() {
                                     <BlueStarIcon />
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <h3 className="text-xl font-bold text-grey-1200">Low Education Rate</h3>
-                                    <p className="text-sm text-grey-800 leading-relaxed">
-                                        Only <strong>20.47%</strong> people above 15 years old in Wonosobo graduated from junior high school, the number decreased for high school level which only accounted for <strong>16.6%</strong> and then the number plummeted for they who graduated for university
-                                        level with a mere of <strong>3.72%</strong> in 2022.
-                                    </p>
+                                    <TextAnimate as="h3" by="line" animation="fadeIn" startOnView once delay={0.8} className="text-xl font-bold text-grey-1200">
+                                        {`Low Education Rate`}
+                                    </TextAnimate>
+                                    <TextAnimate as="p" by="line" animation="fadeIn" startOnView once delay={0.86} className="text-sm text-grey-800 leading-relaxed">
+                                        {`Only 20.47% people above 15 years old in Wonosobo graduated from junior high school, the number decreased for high school level which only accounted for 16.6% and then the number plummeted for they who graduated for university level with a mere of 3.72% in 2022.`}
+                                    </TextAnimate>
                                 </div>
                             </div>
                             <StudentProfileStack />
@@ -142,13 +148,17 @@ export function ProblemsSection() {
 }
 
 /* ---- Stat Card ---- */
-function StatCard({ icon, bgColor, value, label }: { icon: React.ReactNode; bgColor: string; value: string; label: string }) {
+function StatCard({ icon, bgColor, value, label, delay = 0 }: { icon: React.ReactNode; bgColor: string; value: string; label: string; delay?: number }) {
     return (
         <motion.div whileHover={{ scale: 1.06 }} transition={{ type: "spring", stiffness: 380, damping: 26 }} className="flex items-center gap-3 rounded-xl border border-grey-100 bg-white px-4 py-3 shadow-webflow-dropshadow">
             <div className={`w-10 h-10 rounded-lg ${bgColor} flex items-center justify-center shrink-0`}>{icon}</div>
             <div className="min-w-0 flex flex-col gap-1">
-                <p className="text-lg font-bold text-grey-1200 leading-tight">{value}</p>
-                <p className="text-xs text-grey-800 leading-tight">{label}</p>
+                <TextAnimate as="p" by="line" animation="fadeIn" startOnView once delay={delay} className="text-lg font-bold text-grey-1200 leading-tight">
+                    {value}
+                </TextAnimate>
+                <TextAnimate as="p" by="line" animation="fadeIn" startOnView once delay={delay + 0.04} className="text-xs text-grey-800 leading-tight">
+                    {label}
+                </TextAnimate>
             </div>
         </motion.div>
     );
@@ -358,10 +368,10 @@ function ChartLineSvg() {
 /* ---- Student profile stack ---- */
 function StudentProfileStack() {
     const profiles = [
-        { name: "Fazlia Rahma", school: "Sixth Grade School", quote: "I want to study abroad!", color: "from-pink-400 to-rose-400", offset: "translate-y-0", opacity: "opacity-60", scale: "scale-90" },
-        { name: "Fazlia Rahma", school: "Sixth Grade School", quote: "I want to study abroad!", color: "from-amber-400 to-yellow-400", offset: "-translate-y-3", opacity: "opacity-75", scale: "scale-95" },
-        { name: "Fazlia Rahma", school: "Sixth Grade School", quote: "I want to study abroad!", color: "from-emerald-400 to-teal-400", offset: "-translate-y-6", opacity: "opacity-100", scale: "scale-100" },
-        { name: "Fazlia Rahma", school: "Sixth Grade School", quote: "I want to study abroad!", color: "from-pink-400 to-rose-400", offset: "-translate-y-9", opacity: "opacity-60", scale: "scale-90" },
+        { name: "Dena", school: "Fifth Grade", quote: "I want to become a doctor!", color: "from-pink-400 to-rose-400", offset: "translate-y-0", opacity: "opacity-60", scale: "scale-90" },
+        { name: "Anung", school: "Fifth Grade", quote: "I want to become an engineer!", color: "from-amber-400 to-yellow-400", offset: "-translate-y-3", opacity: "opacity-75", scale: "scale-95" },
+        { name: "Kamal", school: "Fourth Grade", quote: "I like Science", color: "from-emerald-400 to-teal-400", offset: "-translate-y-6", opacity: "opacity-100", scale: "scale-100" },
+        { name: "Afnan", school: "Fourth Grade", quote: "I want to study Rocket!", color: "from-pink-400 to-rose-400", offset: "-translate-y-9", opacity: "opacity-60", scale: "scale-90" },
     ];
 
     const loopedProfiles = [...profiles, ...profiles];
@@ -384,7 +394,9 @@ function StudentProfileStack() {
                         {/* Avatar */}
                         <div className={`w-10 h-10 rounded-full bg-linear-to-br ${p.color} shrink-0`} />
                         <div className="min-w-0">
-                            <p className="text-sm font-bold text-grey-1200 truncate">{p.school}</p>
+                            <p className="text-sm font-bold text-grey-1200 truncate">
+                                {p.name} <span className="text-xs text-grey-800">({p.school})</span>
+                            </p>
                             <p className="text-xs text-grey-800 truncate">&quot;{p.quote}&quot;</p>
                         </div>
                     </div>

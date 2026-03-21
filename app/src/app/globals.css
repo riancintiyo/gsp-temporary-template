@@ -69,6 +69,7 @@
     --color-primary-green: var(--primary-green);
     --color-primary-purple: var(--primary-purple);
     --color-primary-blue: var(--primary-blue);
+    --color-primary-yellow: var(--primary-yellow);
 
     /* Design system theme surface colors */
     --color-surface: var(--theme-surface-surface);
@@ -126,11 +127,26 @@
     /* Pill swipe-up effect — lags slightly at entry, peaks at center, drifts out at top */
     --animate-pill-scale: pillScalePulse 18s linear infinite;
     @keyframes pillScalePulse {
-        0%   { transform: scale(0.82) translateY(10px); opacity: 0; }
-        25%  { transform: scale(0.91) translateY(5px);  opacity: 0.7; }
-        50%  { transform: scale(1.0)  translateY(0px);  opacity: 1; }
-        75%  { transform: scale(0.91) translateY(-5px); opacity: 0.7; }
-        100% { transform: scale(0.82) translateY(-10px); opacity: 0; }
+        0% {
+            transform: scale(0.82) translateY(10px);
+            opacity: 0;
+        }
+        25% {
+            transform: scale(0.91) translateY(5px);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1) translateY(0px);
+            opacity: 1;
+        }
+        75% {
+            transform: scale(0.91) translateY(-5px);
+            opacity: 0.7;
+        }
+        100% {
+            transform: scale(0.82) translateY(-10px);
+            opacity: 0;
+        }
     }
 
     /* Slightly slower, smoother shiny text animation */
@@ -207,9 +223,11 @@
     --primary-green: #95d2b3;
     --primary-purple: #d6c7ff;
     --primary-blue: #638ff5;
+    --primary-yellow: #FEC943;
     --primary-green-rgb: 149, 210, 179;
     --primary-purple-rgb: 214, 199, 255;
     --primary-blue-rgb: 99, 143, 245;
+    --primary-yellow-rgb: 254, 201, 67;
 
     --palette-grey-0-rgb: 255, 255, 255;
     --palette-grey-50-rgb: 230, 234, 240;
@@ -801,4 +819,39 @@
     z-index: -1;
     filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
     pointer-events: none;
+}
+
+/* Thin, sleek scrollbar for horizontal image scrollers */
+.thin-scrollbar {
+    /* Always show scrollbar: IE/Edge, Firefox, and WebKit rules */
+    -ms-overflow-style: scrollbar; /* IE and old Edge */
+    scrollbar-width: thin; /* Firefox */
+    /* thumb then track */
+    scrollbar-color: rgba(var(--palette-grey-1200-rgb), 0.32) rgba(var(--palette-grey-0-rgb), 0.06);
+    /* Reserve space so scrollbar is stable and always visible */
+    scrollbar-gutter: stable both-edges;
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+    height: 10px; /* visible size */
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+    background: rgba(var(--palette-grey-0-rgb), 0.06);
+    border-radius: 9999px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(var(--palette-grey-1200-rgb), 0.32);
+    border-radius: 9999px;
+    transition: background-color 120ms ease;
+}
+
+.thin-scrollbar:hover::-webkit-scrollbar-thumb {
+    /* keep hover enhancement but base is visible */
+    background: rgba(var(--palette-grey-1200-rgb), 0.44);
+}
+
+.thin-scrollbar:active::-webkit-scrollbar-thumb {
+    background: rgba(var(--palette-grey-1200-rgb), 0.56);
 }

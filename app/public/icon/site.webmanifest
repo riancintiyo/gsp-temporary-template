@@ -1,20 +1,21 @@
 {
-  "name": "General Science Program",
-  "short_name": "GSP",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
-  "icons": [
-    {
-      "src": "/asset/icon/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/asset/icon/android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+    "name": "General Science Program",
+    "short_name": "GSP",
+    "description": "A STEAM science program empowering elementary students in rural Indonesia through hands-on Science, Technology, Engineering, Art, and Math education.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/icon/android-chrome-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icon/android-chrome-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
 }

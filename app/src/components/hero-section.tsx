@@ -2,6 +2,8 @@ import { ArrowRight } from "lucide-react";
 import { HeroGridPattern } from "./hero-grid-pattern";
 import { HeroBentoGrid } from "./hero-bento-grid";
 import { ShinyButton } from "@/components/ui/shiny-button";
+import { TextAnimate } from "@/components/ui/text-animate";
+import { FadeIn } from "@/components/ui/fade-in";
 
 export function HeroSection() {
     return (
@@ -22,17 +24,17 @@ export function HeroSection() {
                         <path d="M1004.54 94.2996C962.296 249.818 1008.48 439 871.637 439C734.797 439 509 230.991 509 94.2996C509 -42.3917 619.93 -9.53726 756.77 -9.53726C893.61 -9.53726 1051.53 -26.7501 1004.54 94.2996Z" fill="#D6C7FF" />
                     </g>
                     <defs>
-                        <filter id="blur-green" x="-2000" y="-2000" width="6000" height="6000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                        <filter id="blur-green" x="-800" y="-800" width="3600" height="3000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                             <feFlood floodOpacity="0" result="BackgroundImageFix" />
                             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                             <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1558" />
                         </filter>
-                        <filter id="blur-blue" x="-2000" y="-2000" width="6000" height="6000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                        <filter id="blur-blue" x="-800" y="-800" width="3600" height="3000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                             <feFlood floodOpacity="0" result="BackgroundImageFix" />
                             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                             <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1560" />
                         </filter>
-                        <filter id="blur-purple" x="-2000" y="-2000" width="2000" height="2000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                        <filter id="blur-purple" x="-800" y="-800" width="3600" height="3000" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                             <feFlood floodOpacity="0" result="BackgroundImageFix" />
                             <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
                             <feGaussianBlur stdDeviation="254.5" result="effect1_foregroundBlur_77_1559" />
@@ -54,25 +56,26 @@ export function HeroSection() {
             <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col lg:flex-row items-center lg:items-stretch gap-12 lg:gap-16 px-8 lg:px-[var(--page-margin)] py-16 lg:py-24">
                 {/* Left column — Text */}
                 <div className="flex flex-1 flex-col justify-center items-center md:items-start gap-8 lg:gap-10 py-8 lg:py-16">
-                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-[var(--palette-grey-1200)] text-center md:text-left" style={{ fontStyle: "normal" }}>
-                        General Science <br />
-                        Program
-                    </h1>
+                    <TextAnimate as="h1" by="line" animation="fadeIn" duration={0.6} startOnView={false} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-[var(--palette-grey-1200)] text-center md:text-left" style={{ fontStyle: "normal" }}>
+                        {`General Science Program`}
+                    </TextAnimate>
 
-                    <p className="max-w-[520px] text-base sm:text-lg leading-7 text-[var(--palette-grey-800)] text-center md:text-left">Empowering learning and creativity based on Science, Technology, Engineering, Art, Mathematic (STEAM) project for elementary school students in rural areas.</p>
+                    <TextAnimate as="p" by="line" animation="fadeIn" duration={0.5} delay={0.2} startOnView={false} className="max-w-[520px] text-base sm:text-lg leading-7 text-[var(--palette-grey-800)] text-center md:text-left">
+                        {`A STEAM science program empowering learning and creativity through Science, Technology, Engineering, Art, and Math projects for elementary students in rural areas.`}
+                    </TextAnimate>
 
-                    <div className="pt-2">
+                    <FadeIn className="pt-2" delay={0.8} duration={0.45}>
                         <ShinyButton href="/join">
                             <span>Join Our Voluntrip</span>
                             <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
                         </ShinyButton>
-                    </div>
+                    </FadeIn>
                 </div>
 
                 {/* Right column — Bento Grid */}
-                <div className="flex-1 w-full max-w-[580px]">
+                <FadeIn className="flex-1 w-full max-w-[580px]" delay={0.35} duration={0.55}>
                     <HeroBentoGrid />
-                </div>
+                </FadeIn>
             </div>
         </section>
     );

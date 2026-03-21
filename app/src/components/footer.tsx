@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Instagram, Facebook } from "lucide-react";
+import { LazyImage } from "@/components/ui/lazy-image";
 
 const NAV_LINKS = {
     About: [
@@ -14,7 +14,7 @@ const NAV_LINKS = {
 };
 
 const SOCIAL_LINKS = [
-    { label: "Instagram", href: "#", icon: Instagram },
+    { label: "Instagram", href: "https://www.instagram.com/gsp_indo/", icon: Instagram },
     { label: "Facebook", href: "#", icon: Facebook },
 ];
 
@@ -27,7 +27,7 @@ export function Footer() {
                     {/* Left — brand */}
                     <div className="flex flex-col gap-5">
                         <Link href="/" aria-label="GSP Home">
-                            <Image src="/icon/96.png" alt="General Science Program logo" width={52} height={52} className="rounded-full" />
+                            <LazyImage src="/icon/96.png" alt="General Science Program logo" width={52} height={52} className="rounded-full" />
                         </Link>
 
                         <p className="text-sm text-grey-700 leading-relaxed max-w-[300px]">Our vision is to empower elementary students through engaging activities and hands-on STEAM learning.</p>

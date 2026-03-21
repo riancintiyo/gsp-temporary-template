@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { RevealOnView } from "@/components/ui/reveal-on-view";
 import { Send } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -75,9 +76,9 @@ function ProgramSection() {
                     <p className="text-sm font-semibold uppercase tracking-widest text-primary-blue">About the Program</p>
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight text-grey-1200">General Science Program</h1>
                     <p className="text-base sm:text-lg leading-7 text-grey-800 max-w-80 lg:max-w-260">
-                        The <strong>General Science Program (GSP)</strong> aims to empower elementary students by providing them with the tools and inspiration to explore their surrounding environment. Through engaging activities and <strong>STEAM-based hands-on projects</strong>, the program seeks to build their motivation for learning and expand
-                        their knowledge about career exploration. Additionally, the program will offer workshops and seminars for parents and teachers, such as parenting seminars, teaching methods and language training for teachers. The long-term goal of this program is to increase the mean years of
-                        schooling in <strong>rural areas of Indonesia</strong>.
+                        The <strong>General Science Program (GSP)</strong> aims to empower elementary students by providing them with the tools and inspiration to explore their surrounding environment. Through engaging activities and <strong>STEAM-based hands-on projects</strong>, the program seeks
+                        to build their motivation for learning and expand their knowledge about career exploration. Additionally, the program will offer workshops and seminars for parents and teachers, such as parenting seminars, teaching methods and language training for teachers. The long-term
+                        goal of this program is to increase the mean years of schooling in <strong>rural areas of Indonesia</strong>.
                     </p>
                 </div>
             </div>
@@ -115,7 +116,7 @@ function ContactSection() {
                         </h2>
                         <p className="text-base text-grey-800 leading-relaxed mt-2">
                             Have a question, partnership idea, or just want to say hello? <br className="hidden sm:block" />
-                             We&apos;d love to hear from you.
+                            We&apos;d love to hear from you.
                         </p>
                     </div>
 
@@ -199,8 +200,12 @@ function ContactSection() {
 export default function AboutPage() {
     return (
         <div className="min-h-screen bg-white font-(family-name:--font-plus-jakarta)">
-            <ProgramSection />
-            <ContactSection />
+            <RevealOnView>
+                <ProgramSection />
+            </RevealOnView>
+            <RevealOnView delay={0.08}>
+                <ContactSection />
+            </RevealOnView>
         </div>
     );
 }

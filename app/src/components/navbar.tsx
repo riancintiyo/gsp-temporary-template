@@ -2,25 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown, X } from "lucide-react";
 import { TextAnimate } from "@/components/ui/text-animate";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 
 function GSPLogo() {
-    return (
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="18" r="18" fill="url(#gsp-gradient)" />
-            <defs>
-                <linearGradient id="gsp-gradient" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#FF6B6B" />
-                    <stop offset="25%" stopColor="#FFB347" />
-                    <stop offset="50%" stopColor="#95D2B3" />
-                    <stop offset="75%" stopColor="#638FF5" />
-                    <stop offset="100%" stopColor="#D6C7FF" />
-                </linearGradient>
-            </defs>
-        </svg>
-    );
+    return <Image src="/icon/96.png" alt="General Science Program logo" width={36} height={36} className="rounded-full" />;
 }
 
 function NavHoverText({ label }: { label: string }) {
@@ -98,6 +86,7 @@ const PROGRAM_MENU_ITEMS = [
 
 export function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
 
     return (
         <>
@@ -176,10 +165,21 @@ export function Navbar() {
 
                 {/* Drawer links */}
                 <nav className="flex flex-col px-6 py-6 gap-1 flex-1">
-                    <button className="flex items-center justify-between w-full py-3 text-base font-medium text-grey-800 hover:text-grey-1200 transition-colors border-b border-grey-100">
-                        <span>Programs</span>
-                        <ChevronDown className="w-4 h-4" />
-                    </button>
+                    <div>
+                        <button onClick={() => setMobileProgramsOpen((o) => !o)} className="flex items-center justify-between w-full py-3 text-base font-medium text-grey-800 hover:text-grey-1200 transition-colors border-b border-grey-100">
+                            <span>Programs</span>
+                            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileProgramsOpen ? "rotate-180" : ""}`} />
+                        </button>
+                        {mobileProgramsOpen && (
+                            <div className="flex flex-col pl-4">
+                                {PROGRAM_MENU_ITEMS.map(({ href, label }) => (
+                                    <Link key={label} href={href} onClick={() => setMobileOpen(false)} className="py-2.5 text-sm font-medium text-grey-800 hover:text-primary-blue transition-colors">
+                                        {label}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                     {NAV_LINKS.map(({ href, label }) => (
                         <Link key={href} href={href} onClick={() => setMobileOpen(false)} className="py-3 text-base font-medium text-grey-800 hover:text-grey-1200 transition-colors border-b border-grey-100">
                             {label}

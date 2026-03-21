@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
+import { LazyImage } from "@/components/ui/lazy-image";
+import { TextAnimate } from "@/components/ui/text-animate";
+import { FadeIn } from "@/components/ui/fade-in";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -22,22 +24,29 @@ const members: TeamMember[] = [
         name: "Rian C.",
         role: "Founder",
         badge: "Founder GSP",
-        quote: "\u201CIt\u2019s still feel surreal to be able to start and initialize this project. Overcome all self-doubt and keep moving forward to holding on to what you believe is truly remarkable experience.\u201D",
-        image: "/img/poster-1.webp",
+        quote: "\u201CDocendo discimus\u201D—witnessing GSP’s hands-on STEAM impact in Kalidadap proves that by teaching, we truly learn. It is a masterclass in rekindling curiosity and bridging post-pandemic educational gaps.",
+        image: "/img/profile-pic.png",
     },
     {
         name: "Dwi Sari p.",
         role: "Program Director",
         badge: "Co-Founder",
         quote: "\u201CEducation is the most powerful weapon which you can use to change the world. We believe every child deserves access to quality learning.\u201D",
-        image: "/img/poster-2.webp",
+        image: "/img/dwi-s.jpeg",
     },
     {
-        name: "Nirmala",
+        name: "Nirmalasari",
         role: "Community Lead",
         badge: "Core Team",
         quote: "\u201CWatching students discover their potential in STEAM gives me endless motivation. The spark in their eyes is why we do this work every day.\u201D",
-        image: "/img/poster-1.webp",
+        image: "/img/nirma.png",
+    },
+    {
+        name: "dr. Riani I.",
+        role: "STEAM Guest Lecture",
+        badge: "Partner Team",
+        quote: "\u201CDocendo discimus\u201D—witnessing GSP’s hands-on STEAM impact in Kalidadap proves that by teaching, we truly learn. It is a masterclass in rekindling curiosity and bridging post-pandemic educational gaps.",
+        image: "/img/riani-pic.png",
     },
 ];
 
@@ -93,60 +102,64 @@ export function TeamSection() {
             <div className="mx-auto w-full max-w-360 px-8 lg:px-(--page-margin)">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-10 lg:mb-12">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-grey-1200 leading-tight">Meet the Team</h2>
+                    <TextAnimate as="h2" by="line" animation="fadeIn" startOnView once className="text-3xl sm:text-4xl font-bold text-grey-1200 leading-tight">
+                        {`Meet the Team`}
+                    </TextAnimate>
                 </div>
             </div>
 
             {/* Scrollable track — bleeds to edge */}
-            <div className="mx-auto w-full max-w-360 px-8 lg:px-(--page-margin)">
-                <div ref={trackRef} className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-3" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-                    {members.map((member, idx) => (
-                        <motion.div
-                            key={member.name}
-                            data-team-card
-                            whileHover={{ scale: 1.015, y: -2 }}
-                            transition={{ type: "spring", stiffness: 380, damping: 26 }}
-                            className="group flex-none w-[min(520px,85vw)] snap-start rounded-2xl overflow-hidden flex flex-col sm:flex-row shadow-webflow-dropshadow"
-                            style={{ background: "#e8deff", ...dotGridStyle }}
-                        >
-                            {/* Photo */}
-                            <div className="relative h-52 sm:h-auto sm:w-44 shrink-0 self-stretch">
-                                <Image src={member.image} alt={member.name} fill className="object-cover grayscale" sizes="176px" />
-                            </div>
-
-                            {/* Content */}
-                            <div className="flex flex-col justify-between px-5 py-5 flex-1 min-w-0">
-                                {/* Badge */}
-                                <div>
-                                    <span className="inline-block rounded-full border border-grey-400 bg-white/60 backdrop-blur-sm px-3 py-1 text-[11px] font-medium text-grey-1000 mb-3">{member.badge}</span>
-
-                                    {/* Quote */}
-                                    <p className="text-[13px] leading-relaxed text-grey-1100 italic">{member.quote}</p>
+            <FadeIn startOnView delay={0.12} duration={0.5} y={12}>
+                <div className="mx-auto w-full max-w-360 px-8 lg:px-(--page-margin)">
+                    <div ref={trackRef} className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-3" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+                        {members.map((member, idx) => (
+                            <motion.div
+                                key={member.name}
+                                data-team-card
+                                whileHover={{ scale: 1.015, y: -2 }}
+                                transition={{ type: "spring", stiffness: 380, damping: 26 }}
+                                className="group flex-none w-[min(520px,85vw)] snap-start rounded-2xl overflow-hidden flex flex-col sm:flex-row shadow-webflow-dropshadow"
+                                style={{ background: "#e8deff", ...dotGridStyle }}
+                            >
+                                {/* Photo */}
+                                <div className="relative h-52 sm:h-auto sm:w-44 shrink-0 self-stretch">
+                                    <LazyImage src={member.image} alt={member.name} fill className="object-cover grayscale" sizes="176px" />
                                 </div>
 
-                                {/* Name + role + clover */}
-                                <div className="flex items-end justify-between mt-4">
+                                {/* Content */}
+                                <div className="flex flex-col justify-between px-5 py-5 flex-1 min-w-0">
+                                    {/* Badge */}
                                     <div>
-                                        <p className="font-bold text-grey-1200 text-sm">{member.name}</p>
-                                        <p className="text-xs text-grey-800">{member.role}</p>
-                                    </div>
-                                    {idx % 2 === 1 ? <Icon className="w-8 h-8 shrink-0" /> : <AltIcon className="w-8 h-8 shrink-0" />}
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+                                        <span className="inline-block rounded-full border border-grey-400 bg-white/60 backdrop-blur-sm px-3 py-1 text-[11px] font-medium text-grey-1000 mb-3">{member.badge}</span>
 
-                {/* Navigation */}
-                <div className="flex items-center gap-2 mt-6">
-                    <button onClick={() => scroll("prev")} aria-label="Previous member" className="flex items-center justify-center w-9 h-9 rounded-full border border-grey-200 bg-white text-grey-800 hover:bg-grey-50 transition-colors shadow-webflow-dropshadow">
-                        <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    <button onClick={() => scroll("next")} aria-label="Next member" className="flex items-center justify-center w-9 h-9 rounded-full border border-grey-200 bg-white text-grey-800 hover:bg-grey-50 transition-colors shadow-webflow-dropshadow">
-                        <ChevronRight className="w-4 h-4" />
-                    </button>
+                                        {/* Quote */}
+                                        <p className="text-[13px] leading-relaxed text-grey-1100 italic">{member.quote}</p>
+                                    </div>
+
+                                    {/* Name + role + clover */}
+                                    <div className="flex items-end justify-between mt-4">
+                                        <div>
+                                            <p className="font-bold text-grey-1200 text-sm">{member.name}</p>
+                                            <p className="text-xs text-grey-800">{member.role}</p>
+                                        </div>
+                                        {idx % 2 === 1 ? <Icon className="w-8 h-8 shrink-0" /> : <AltIcon className="w-8 h-8 shrink-0" />}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* Navigation */}
+                    <div className="flex items-center gap-2 mt-6">
+                        <button onClick={() => scroll("prev")} aria-label="Previous member" className="flex items-center justify-center w-9 h-9 rounded-full border border-grey-200 bg-white text-grey-800 hover:bg-grey-50 transition-colors shadow-webflow-dropshadow">
+                            <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <button onClick={() => scroll("next")} aria-label="Next member" className="flex items-center justify-center w-9 h-9 rounded-full border border-grey-200 bg-white text-grey-800 hover:bg-grey-50 transition-colors shadow-webflow-dropshadow">
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </FadeIn>
         </section>
     );
 }
