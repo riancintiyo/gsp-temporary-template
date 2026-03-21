@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import type { ComponentType, SVGProps } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Microscope, Volleyball, Atom, User, ChevronLeft, ChevronRight } from "lucide-react";
@@ -84,7 +84,7 @@ const activities: Activity[] = [
         images: [
             { src: "/img/gsp/6.webp", alt: "Nutrition Sharing from SME", related_desc: "Explaining about balanced nutrition and healthy eating habits." },
             { src: "/img/gsp/image-12.jpg", alt: "Healthy Breakfast", related_desc: "Providing meals for students that align with balanced nutrition principles." },
-            { src: "/img/gsp/2.png", alt: "Introduction to Balanced Nutrition", related_desc: "Visual representation of balanced nutrition principles." },
+            { src: "/img/gsp/poster-2.png", alt: "Introduction to Balanced Nutrition", related_desc: "Visual representation of balanced nutrition principles." },
         ],
     },
     {
@@ -103,6 +103,8 @@ const activities: Activity[] = [
         ],
     },
 ];
+
+const allActivityImageSources = activities.flatMap((activity) => activity.images.map((image) => image.src));
 
 /* ------------------------------------------------------------------ */
 /*  SVG assets                                                         */
@@ -244,16 +246,32 @@ function GspLogo({ className, iconName }: { className?: string; iconName?: strin
     );
 }
 
+function ImageSkeleton({ className }: { className?: string }) {
+    return <div className={`absolute inset-0 z-1 animate-pulse bg-linear-to-br from-grey-200 via-grey-100 to-grey-200 ${className}`} />;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Inner image carousel (inside the featured card)                    */
 /* ------------------------------------------------------------------ */
 
-function InnerImageCarousel({ images, currentIdx, onIdxChange }: { images: ActivityImage[]; currentIdx: number; onIdxChange: (i: number) => void }) {
+function InnerImageCarousel({ images, currentIdx, onIdxChange, eagerLoad, isCurrentImageLoaded, onImageLoaded }: { images: ActivityImage[]; currentIdx: number; onIdxChange: (i: number) => void; eagerLoad: boolean; isCurrentImageLoaded: boolean; onImageLoaded: (src: string) => void }) {
     return (
         <div className="relative w-full h-full overflow-hidden rounded-2xl">
             <AnimatePresence initial={false}>
                 <motion.div key={currentIdx} initial={{ opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1 }} transition={{ duration: 0.75, ease: "easeOut" }} className="absolute inset-0">
-                    <LazyImage src={images[currentIdx].src} alt={images[currentIdx].alt} fill draggable={false} className="object-cover w-full h-full" sizes="(max-width: 720px) 80vw, 40vw" />
+                    {!isCurrentImageLoaded && <ImageSkeleton />}
+                    <LazyImage
+                        src={images[currentIdx].src}
+                        alt={images[currentIdx].alt}
+                        fill
+                        draggable={false}
+                        className="object-cover w-full h-full"
+                        sizes="(max-width: 720px) 80vw, 40vw"
+                        priority={eagerLoad}
+                        loading={eagerLoad ? "eager" : "lazy"}
+                        onLoad={() => onImageLoaded(images[currentIdx].src)}
+                        onError={() => onImageLoaded(images[currentIdx].src)}
+                    />
                 </motion.div>
             </AnimatePresence>
 
@@ -273,9 +291,10 @@ function InnerImageCarousel({ images, currentIdx, onIdxChange }: { images: Activ
 
 const AUTOPLAY_INTERVAL = 6500;
 
-function FeaturedCard({ activity }: { activity: Activity }) {
+function FeaturedCard({ activity, eagerLoad, loadedImageSources, onImageLoaded }: { activity: Activity; eagerLoad: boolean; loadedImageSources: Set<string>; onImageLoaded: (src: string) => void }) {
     const images = activity.images;
     const [innerIdx, setInnerIdx] = useState(0);
+    const currentImageSrc = images[innerIdx]?.src ?? "";
 
     // Autoplay
     useEffect(() => {
@@ -290,7 +309,7 @@ function FeaturedCard({ activity }: { activity: Activity }) {
         <div className="relative flex flex-col rounded-2xl overflow-hidden bg-grey-1200 shadow-webflow-dropshadow">
             {/* Image area with inner carousel */}
             <div className="relative w-full aspect-4/5">
-                <InnerImageCarousel images={images} currentIdx={innerIdx} onIdxChange={setInnerIdx} />
+                <InnerImageCarousel images={images} currentIdx={innerIdx} onIdxChange={setInnerIdx} eagerLoad={eagerLoad} isCurrentImageLoaded={loadedImageSources.has(currentImageSrc)} onImageLoaded={onImageLoaded} />
 
                 {/* Overlay: tags + date */}
                 <div className="absolute top-4 left-4 right-4 flex items-start justify-between z-10">
@@ -329,12 +348,23 @@ const swipeConfidenceThreshold = 10_000;
 const swipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity;
 
 export function WhatWeDoSection() {
+    const sectionRef = useRef<HTMLElement | null>(null);
     const [[page, direction], setPage] = useState([0, 0]);
+    const [hasEnteredSection, setHasEnteredSection] = useState(false);
+    const [loadedImageSources, setLoadedImageSources] = useState<Set<string>>(new Set());
     const slideCount = activities.length;
     const activeIndex = ((page % slideCount) + slideCount) % slideCount;
     const activity = activities[activeIndex];
 
     const paginate = useCallback((newDirection: number) => setPage(([p]) => [p + newDirection, newDirection]), []);
+    const markImageLoaded = useCallback((source: string) => {
+        setLoadedImageSources((prev) => {
+            if (prev.has(source)) return prev;
+            const next = new Set(prev);
+            next.add(source);
+            return next;
+        });
+    }, []);
 
     const variants = {
         enter: (d: number) => ({ x: d > 0 ? 600 : -600, opacity: 0 }),
@@ -342,8 +372,48 @@ export function WhatWeDoSection() {
         exit: (d: number) => ({ x: d > 0 ? -600 : 600, opacity: 0 }),
     };
 
+    useEffect(() => {
+        const sectionElement = sectionRef.current;
+        if (!sectionElement || hasEnteredSection) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (!entries[0]?.isIntersecting) return;
+                setHasEnteredSection(true);
+                observer.disconnect();
+            },
+            {
+                root: null,
+                threshold: 0.15,
+                rootMargin: "120px 0px",
+            },
+        );
+
+        observer.observe(sectionElement);
+        return () => observer.disconnect();
+    }, [hasEnteredSection]);
+
+    useEffect(() => {
+        if (!hasEnteredSection) return;
+
+        const preloadedImages = allActivityImageSources.map((source) => {
+            const image = new Image();
+            image.onload = () => markImageLoaded(source);
+            image.onerror = () => markImageLoaded(source);
+            image.src = source;
+            return image;
+        });
+
+        return () => {
+            for (const image of preloadedImages) {
+                image.onload = null;
+                image.onerror = null;
+            }
+        };
+    }, [hasEnteredSection, markImageLoaded]);
+
     return (
-        <section className="relative w-full py-16 lg:py-24 overflow-hidden bg-primary-green font-sans">
+        <section ref={sectionRef} className="relative w-full py-16 lg:py-24 overflow-hidden bg-primary-green font-sans">
             {/* Grid background */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60">
                 <GridPattern className="w-full h-full" />
@@ -386,7 +456,7 @@ export function WhatWeDoSection() {
                             {/* Two‑column slide */}
                             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6 lg:gap-8 bg-white/60 backdrop-blur-sm rounded-3xl p-5 lg:p-8 shadow-webflow-dropshadow">
                                 {/* Left — featured card */}
-                                <FeaturedCard activity={activity} />
+                                <FeaturedCard activity={activity} eagerLoad={hasEnteredSection} loadedImageSources={loadedImageSources} onImageLoaded={markImageLoaded} />
 
                                 {/* Right — info + related images */}
                                 <div className="flex flex-col gap-2 md:gap-4 justify-center">
@@ -407,7 +477,19 @@ export function WhatWeDoSection() {
                                     <div className="md:flex gap-3 overflow-x-auto pb-1 mt-0 md:mt-6 hidden thin-scrollbar">
                                         {activity.images.map((img, i) => (
                                             <div key={i} className="relative w-36 lg:w-60 shrink-0 aspect-4/5 rounded-2xl overflow-hidden shadow-webflow-dropshadow">
-                                                <LazyImage src={img.src} alt={img.alt} fill draggable={false} className="object-cover w-full h-full" sizes="420px" />
+                                                {!loadedImageSources.has(img.src) && <ImageSkeleton className="z-1" />}
+                                                <LazyImage
+                                                    src={img.src}
+                                                    alt={img.alt}
+                                                    fill
+                                                    draggable={false}
+                                                    className="object-cover w-full h-full"
+                                                    sizes="420px"
+                                                    priority={hasEnteredSection}
+                                                    loading={hasEnteredSection ? "eager" : "lazy"}
+                                                    onLoad={() => markImageLoaded(img.src)}
+                                                    onError={() => markImageLoaded(img.src)}
+                                                />
                                                 {/* Mini overlay */}
                                                 <div className="absolute top-3 left-3 right-3 flex gap-1.5 z-10">
                                                     {activity.tags.slice(0, 2).map((t) => (
