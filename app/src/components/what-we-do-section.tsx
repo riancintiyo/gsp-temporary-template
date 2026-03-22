@@ -315,7 +315,7 @@ function FeaturedCard({ activity, eagerLoad, loadedImageSources, onImageLoaded }
 
                 {/* Overlay: tags + date */}
                 <div className="absolute top-4 left-4 right-4 flex items-start justify-between z-10">
-                    <div className="flex gap-2">
+                    <div className="hidden md:flex gap-2">
                         {activity.tags.slice(0, 2).map((tag) => (
                             <span key={tag.label} className={`inline-block rounded-full px-3 py-1 text-xs font-medium backdrop-blur-sm ${tag.color}`}>
                                 {tag.label}

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion } from "motion/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Pointer } from "@/components/ui/pointer";
 import { LazyImage } from "@/components/ui/lazy-image";
 import { TextAnimate } from "@/components/ui/text-animate";
@@ -226,6 +227,26 @@ export function GallerySection() {
                                 );
                             })}
                         </div>
+                    </div>
+
+                    {/* ---- Mobile prev/next ---- */}
+                    <div className="mt-5 flex items-center justify-center gap-2 md:hidden">
+                        <button
+                            type="button"
+                            onClick={() => advance(-1)}
+                            aria-label="Previous image"
+                            className="flex items-center justify-center w-9 h-9 rounded-full border border-grey-200 bg-white text-grey-800 hover:bg-grey-50 transition-colors shadow-webflow-dropshadow"
+                        >
+                            <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => advance(1)}
+                            aria-label="Next image"
+                            className="flex items-center justify-center w-9 h-9 rounded-full border border-grey-200 bg-white text-grey-800 hover:bg-grey-50 transition-colors shadow-webflow-dropshadow"
+                        >
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
                     </div>
 
                     {/* ---- Progress dots ---- */}
