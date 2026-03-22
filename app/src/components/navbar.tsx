@@ -80,8 +80,8 @@ const NAV_LINKS = [
 ];
 
 const PROGRAM_MENU_ITEMS = [
-    { href: "#", label: "Voluntrip Program" },
-    { href: "#", label: "STEAM Volunteer Application" },
+    { href: "/join", label: "Voluntrip Program" },
+    { href: "/join", label: "STEAM Volunteer Application" },
 ];
 
 export function Navbar() {
@@ -129,7 +129,7 @@ export function Navbar() {
                 </div>
 
                 {/* Desktop CTA */}
-                <Link href="#" className="hidden md:flex items-center justify-center px-6 py-2.5 rounded-full bg-grey-1200 text-white text-sm font-semibold hover:bg-grey-900 transition-colors">
+                <Link href="/join" className="hidden md:flex items-center justify-center px-6 py-2.5 rounded-full bg-grey-1200 text-white text-sm font-semibold hover:bg-grey-900 transition-colors">
                     Join Us
                 </Link>
 
@@ -189,7 +189,7 @@ export function Navbar() {
 
                 {/* Drawer CTA */}
                 <div className="px-6 py-6">
-                    <Link href="#" onClick={() => setMobileOpen(false)} className="flex items-center justify-center w-full px-6 py-3 rounded-full bg-grey-1200 text-white text-sm font-semibold hover:bg-grey-900 transition-colors">
+                    <Link href="/join" onClick={() => setMobileOpen(false)} className="flex items-center justify-center w-full px-6 py-3 rounded-full bg-grey-1200 text-white text-sm font-semibold hover:bg-grey-900 transition-colors">
                         Join Us
                     </Link>
                 </div>

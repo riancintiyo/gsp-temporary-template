@@ -5,10 +5,10 @@ import { LazyImage } from "@/components/ui/lazy-image";
 const NAV_LINKS = {
     About: [
         { label: "About GSP", href: "/about" },
-        { label: "Partnership", href: "#" },
+        { label: "Partnership", href: "/join" },
     ],
     Community: [
-        { label: "Voluntrip Program", href: "#" },
+        { label: "Voluntrip Program", href: "/join" },
         { label: "Blog", href: "/blog" },
     ],
 };
