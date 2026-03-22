@@ -16,7 +16,7 @@ export function QuoteSection() {
                 <div className="w-full h-full bg-primary-blue" />
             </RevealOnView>
 
-            <div className="relative z-10 mx-auto w-full px-8 lg:px-(--page-margin) py-16 lg:py-24">
+            <div className="relative z-10 mx-auto w-full px-8 lg:px-(--page-margin) py-16 lg:py-24 lg:max-w-360">
                 {/* Top meta row */}
                 <div className="flex items-center justify-between mb-8 lg:mb-12">
                     <span className="text-white/60 text-xs font-medium tracking-wide">{formattedDate}</span>

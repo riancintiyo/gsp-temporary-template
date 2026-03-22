@@ -11,7 +11,7 @@ export function Pointer({ className, style, children, ...props }: HTMLMotionProp
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const parent = typeof window !== "undefined" ? (containerRef.current?.parentElement ?? null) : null;
+        const parent = containerRef.current?.parentElement ?? null;
         const supportsHoverPointer = typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
         if (!parent || !supportsHoverPointer) {
@@ -55,10 +55,10 @@ export function Pointer({ className, style, children, ...props }: HTMLMotionProp
                     <motion.div
                         className={cn("pointer-events-none fixed z-50", className)}
                         style={{ top: y, left: x, translate: "-50% -50%", ...style }}
-                        initial={{ scale: 0, opacity: 0 }}
+                        initial={{ scale: 0.7, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0, opacity: 0 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+                        exit={{ scale: 0.7, opacity: 0 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
                         {...props}
                     >
                         {children}

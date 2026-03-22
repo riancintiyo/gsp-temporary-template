@@ -247,7 +247,7 @@ function GspLogo({ className, iconName }: { className?: string; iconName?: strin
 }
 
 function ImageSkeleton({ className }: { className?: string }) {
-    return <div className={`absolute inset-0 z-1 animate-pulse bg-linear-to-br from-grey-200 via-grey-100 to-grey-200 ${className}`} />;
+    return <div className={`absolute inset-0 z-10 pointer-events-none animate-pulse bg-linear-to-br from-grey-200 via-grey-100 to-grey-200 ${className}`} />;
 }
 
 /* ------------------------------------------------------------------ */
@@ -255,28 +255,30 @@ function ImageSkeleton({ className }: { className?: string }) {
 /* ------------------------------------------------------------------ */
 
 function InnerImageCarousel({ images, currentIdx, onIdxChange, eagerLoad, isCurrentImageLoaded, onImageLoaded }: { images: ActivityImage[]; currentIdx: number; onIdxChange: (i: number) => void; eagerLoad: boolean; isCurrentImageLoaded: boolean; onImageLoaded: (src: string) => void }) {
+    const currentImage = images[currentIdx];
+
     return (
         <div className="relative w-full h-full overflow-hidden rounded-2xl">
             <AnimatePresence initial={false}>
                 <motion.div key={currentIdx} initial={{ opacity: 0, scale: 1.06 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1 }} transition={{ duration: 0.75, ease: "easeOut" }} className="absolute inset-0">
                     {!isCurrentImageLoaded && <ImageSkeleton />}
                     <LazyImage
-                        src={images[currentIdx].src}
-                        alt={images[currentIdx].alt}
+                        src={currentImage.src}
+                        alt={currentImage.alt}
                         fill
                         draggable={false}
-                        className="object-cover w-full h-full"
+                        className={`object-cover w-full h-full transition-opacity duration-300 ${isCurrentImageLoaded ? "opacity-100" : "opacity-0"}`}
                         sizes="(max-width: 720px) 80vw, 40vw"
                         priority={eagerLoad}
                         loading={eagerLoad ? "eager" : "lazy"}
-                        onLoad={() => onImageLoaded(images[currentIdx].src)}
-                        onError={() => onImageLoaded(images[currentIdx].src)}
+                        onLoad={() => onImageLoaded(currentImage.src)}
+                        onError={() => onImageLoaded(currentImage.src)}
                     />
                 </motion.div>
             </AnimatePresence>
 
             {/* Dot indicators */}
-            <div className="absolute bottom-20 left-0 right-0 flex justify-center gap-2 z-10">
+            <div className="absolute bottom-28 md:bottom-20 left-0 right-0 flex justify-center gap-2 z-20">
                 {images.map((_, i) => (
                     <button key={i} onClick={() => onIdxChange(i)} aria-label={`Go to image ${i + 1}`} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentIdx ? "bg-white w-5" : "bg-white/80"}`} />
                 ))}

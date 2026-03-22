@@ -24,7 +24,7 @@ const members: TeamMember[] = [
         name: "Rian C.",
         role: "Founder",
         badge: "Founder GSP",
-        quote: "\u201CDocendo discimus\u201D—witnessing GSP’s hands-on STEAM impact in Kalidadap proves that by teaching, we truly learn. It is a masterclass in rekindling curiosity and bridging post-pandemic educational gaps.",
+        quote: "\u201CGSP started with a simple belief: every child deserves access to inspiring education—now it has grown into a movement bringing opportunity closer to those who need it most.\u201D",
         image: "/img/profile-pic.png",
     },
     {

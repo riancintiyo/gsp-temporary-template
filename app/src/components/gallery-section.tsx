@@ -161,9 +161,10 @@ export function GallerySection() {
 
                 {/* ---- Coverflow ---- */}
                 <FadeIn startOnView delay={0.12} duration={0.5} y={12}>
+                    {/* Outer wrapper: handles pointer events + Pointer (no perspective/transform) */}
                     <div
                         className="relative mx-auto w-full select-none"
-                        style={{ height: CARD_H + 100, perspective: "1400px", touchAction: "pan-y" }}
+                        style={{ height: CARD_H + 100, touchAction: "pan-y" }}
                         onPointerDown={onPointerDown}
                         onPointerMove={onPointerMove}
                         onPointerUp={onPointerUp}
@@ -188,40 +189,43 @@ export function GallerySection() {
                                 <span className="text-xs font-semibold text-grey-1200 whitespace-nowrap">Swipe Me</span>
                             </div>
                         </Pointer>
-                        {IMAGES.map((img, idx) => {
-                            const cfg = slotFor(idx, center);
-                            const isCenter = idx === center;
-                            const isHidden = cfg.zIndex === 0;
+                        {/* Inner container: holds perspective + cards */}
+                        <div className="absolute inset-0" style={{ perspective: "1400px" }}>
+                            {IMAGES.map((img, idx) => {
+                                const cfg = slotFor(idx, center);
+                                const isCenter = idx === center;
+                                const isHidden = cfg.zIndex === 0;
 
-                            return (
-                                <motion.div
-                                    key={idx}
-                                    className="absolute overflow-hidden rounded-2xl pointer-events-none md:pointer-events-auto"
-                                    style={{
-                                        width: CARD_W,
-                                        height: CARD_H,
-                                        left: "50%",
-                                        top: "50%",
-                                        marginTop: -(CARD_H / 2),
-                                        touchAction: "pan-y",
-                                        boxShadow: isCenter ? "0 28px 72px rgba(0,0,0,0.38)" : "0 8px 28px rgba(0,0,0,0.20)",
-                                    }}
-                                    animate={{
-                                        x: cfg.x - CARD_W / 2,
-                                        rotateY: cfg.rotateY,
-                                        scale: cfg.scale,
-                                        zIndex: cfg.zIndex,
-                                        opacity: isHidden ? 0 : 1,
-                                    }}
-                                    transition={{ type: "spring", stiffness: 280, damping: 32 }}
-                                    onClick={() => onCardClick(idx)}
-                                >
-                                    <LazyImage src={img.src} alt={img.alt} fill className="object-cover pointer-events-none" sizes={`${CARD_W}px`} priority={isCenter} />
-                                    {/* Darkening overlay for non-center cards */}
-                                    <motion.div className="absolute inset-0 bg-black pointer-events-none" animate={{ opacity: cfg.dim }} transition={{ type: "spring", stiffness: 280, damping: 32 }} />
-                                </motion.div>
-                            );
-                        })}
+                                return (
+                                    <motion.div
+                                        key={idx}
+                                        className="absolute overflow-hidden rounded-2xl pointer-events-none md:pointer-events-auto"
+                                        style={{
+                                            width: CARD_W,
+                                            height: CARD_H,
+                                            left: "50%",
+                                            top: "50%",
+                                            marginTop: -(CARD_H / 2),
+                                            touchAction: "pan-y",
+                                            boxShadow: isCenter ? "0 28px 72px rgba(0,0,0,0.38)" : "0 8px 28px rgba(0,0,0,0.20)",
+                                        }}
+                                        animate={{
+                                            x: cfg.x - CARD_W / 2,
+                                            rotateY: cfg.rotateY,
+                                            scale: cfg.scale,
+                                            zIndex: cfg.zIndex,
+                                            opacity: isHidden ? 0 : 1,
+                                        }}
+                                        transition={{ type: "spring", stiffness: 280, damping: 32 }}
+                                        onClick={() => onCardClick(idx)}
+                                    >
+                                        <LazyImage src={img.src} alt={img.alt} fill className="object-cover pointer-events-none" sizes={`${CARD_W}px`} priority={isCenter} />
+                                        {/* Darkening overlay for non-center cards */}
+                                        <motion.div className="absolute inset-0 bg-black pointer-events-none" animate={{ opacity: cfg.dim }} transition={{ type: "spring", stiffness: 280, damping: 32 }} />
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
                     </div>
 
                     {/* ---- Progress dots ---- */}
