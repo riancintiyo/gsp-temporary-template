@@ -147,11 +147,20 @@ function RouteLine() {
 
 function BgSvgMap() {
     return (
-        <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 md:top-20 md:-bottom-20 z-0">
+        <RevealOnView
+            y={0}
+            scaleFrom={1}
+            blurFrom={20}
+            delay={0.12}
+            duration={0.5}
+            threshold={0.56}
+            rootMargin="0px"
+            className="pointer-events-none absolute inset-x-0 top-0 bottom-0 md:top-20 md:-bottom-20 z-0"
+        >
             <div className="relative w-full h-full">
                 <LazyImage src="/img/gradient-blob.webp" alt="" fill className="object-cover" />
             </div>
-        </div>
+        </RevealOnView>
     );
 }
 
