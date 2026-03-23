@@ -151,7 +151,7 @@ export default function TemporaryPlaceholder({
     }, []);
 
     return (
-        <main className={`container ${isLightTheme ? "lightTheme" : ""}`}>
+        <main className={`devPlaceholderContainer ${isLightTheme ? "lightTheme" : ""}`}>
             <div className="dinoScene" ref={sceneRef}>
                 <div className="dinoGroundWrap">
                     <div className="dinoGround" />

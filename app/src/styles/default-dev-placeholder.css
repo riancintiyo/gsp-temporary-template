@@ -1,4 +1,4 @@
-.container {
+.devPlaceholderContainer {
     box-sizing: border-box;
     min-height: 100vh;
     position: relative;
@@ -24,8 +24,8 @@
         sans-serif;
 }
 
-.container,
-.container * {
+.devPlaceholderContainer,
+.devPlaceholderContainer * {
     box-sizing: border-box;
 }
 
@@ -612,7 +612,7 @@
 }
 
 @media (max-width: 480px) {
-    .container {
+    .devPlaceholderContainer {
         padding: 12px;
     }
 
@@ -678,7 +678,7 @@
 }
 
 @media (max-width: 360px) {
-    .container {
+    .devPlaceholderContainer {
         padding: 8px;
     }
 
