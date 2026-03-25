@@ -93,6 +93,7 @@ function ProgramSection() {
 
 function ContactSection() {
     const [submitted, setSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     const formik = useFormik({
         initialValues: {
@@ -100,6 +101,7 @@ function ContactSection() {
             email: "",
             subject: "",
             message: "",
+            website: "",
         },
         validate: (values) => {
             const errors: Partial<Record<keyof typeof values, string>> = {};
@@ -130,8 +132,35 @@ function ContactSection() {
 
             return errors;
         },
-        onSubmit: () => {
-            setSubmitted(true);
+        onSubmit: async (values, helpers) => {
+            setSubmitError(null);
+
+            try {
+                const response = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: values.name,
+                        email: values.email,
+                        subject: values.subject,
+                        message: values.message,
+                        website: values.website,
+                    }),
+                });
+
+                const payload: { ok?: boolean; message?: string } = await response.json();
+
+                if (!response.ok || !payload.ok) {
+                    setSubmitError(payload.message ?? "Failed to send message. Please try again.");
+                    return;
+                }
+
+                setSubmitted(true);
+            } catch {
+                setSubmitError("Something went wrong. Please try again in a moment.");
+            } finally {
+                helpers.setSubmitting(false);
+            }
         },
     });
 
@@ -173,6 +202,7 @@ function ContactSection() {
                                             type="button"
                                             onClick={() => {
                                                 setSubmitted(false);
+                                                setSubmitError(null);
                                                 formik.resetForm();
                                             }}
                                             className="mt-2 text-sm text-primary-blue hover:underline"
@@ -182,6 +212,7 @@ function ContactSection() {
                                     </div>
                                 ) : (
                                     <form onSubmit={formik.handleSubmit} className="grid gap-5" noValidate>
+                                        <input id="website" name="website" type="text" autoComplete="off" tabIndex={-1} className="hidden" value={formik.values.website} onChange={formik.handleChange} />
                                         {/* Name + Email row */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div className="flex flex-col gap-4">
@@ -206,14 +237,25 @@ function ContactSection() {
                                         {/* Message */}
                                         <div className="flex flex-col gap-4">
                                             <Label htmlFor="message">Message</Label>
-                                            <Textarea id="message" name="message" placeholder="Write your message here…" rows={5} value={formik.values.message} onChange={formik.handleChange} onBlur={formik.handleBlur} aria-invalid={Boolean(formik.touched.message && formik.errors.message)} required />
+                                            <Textarea
+                                                id="message"
+                                                name="message"
+                                                placeholder="Write your message here…"
+                                                rows={5}
+                                                value={formik.values.message}
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                aria-invalid={Boolean(formik.touched.message && formik.errors.message)}
+                                                required
+                                            />
                                             {formik.touched.message && formik.errors.message ? <p className="text-sm text-red-600">{formik.errors.message}</p> : null}
                                         </div>
 
-                                        <Button type="submit" className="w-full bg-grey-1200 text-white hover:bg-grey-1000 rounded-lg h-10 font-semibold flex items-center justify-center gap-2">
+                                        <Button type="submit" disabled={formik.isSubmitting} className="w-full bg-grey-1200 text-white hover:bg-grey-1000 rounded-lg h-10 font-semibold flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
                                             <Send className="w-4 h-4" />
-                                            Send Message
+                                            {formik.isSubmitting ? "Sending..." : "Send Message"}
                                         </Button>
+                                        {submitError ? <p className="text-sm text-red-600 text-center">{submitError}</p> : null}
                                     </form>
                                 )}
                             </CardContent>

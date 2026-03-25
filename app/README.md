@@ -34,3 +34,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Contact Form (Resend)
+
+The About page contact form posts to `POST /api/contact` and sends email using Resend.
+
+Set these environment variables in local `.env.local` and in Vercel project settings:
+
+```bash
+RESEND_API_KEY=your_resend_api_key
+CONTACT_FROM_EMAIL=GSP Contact <onboarding@resend.dev>
+CONTACT_TO_EMAIL=riancintiyo@generalscienceprogram.com
+```
+
+Notes:
+- `CONTACT_FROM_EMAIL` must use a sender identity verified in Resend.
+- `CONTACT_TO_EMAIL` defaults to `riancintiyo@generalscienceprogram.com` if omitted.
