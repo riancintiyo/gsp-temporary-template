@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useFormik } from "formik";
 import { HeroGridPattern } from "@/components/hero-grid-pattern";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -91,18 +92,48 @@ function ProgramSection() {
 /* ------------------------------------------------------------------ */
 
 function ContactSection() {
-    const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
     const [submitted, setSubmitted] = useState(false);
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+        },
+        validate: (values) => {
+            const errors: Partial<Record<keyof typeof values, string>> = {};
 
-    function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        // TODO: Wire up to real backend / email service
-        setSubmitted(true);
-    }
+            if (!values.name.trim()) {
+                errors.name = "Full name is required.";
+            } else if (values.name.trim().length < 2) {
+                errors.name = "Full name must be at least 2 characters.";
+            }
+
+            if (!values.email.trim()) {
+                errors.email = "Email is required.";
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+                errors.email = "Please enter a valid email address.";
+            }
+
+            if (!values.subject.trim()) {
+                errors.subject = "Subject is required.";
+            } else if (values.subject.trim().length < 3) {
+                errors.subject = "Subject must be at least 3 characters.";
+            }
+
+            if (!values.message.trim()) {
+                errors.message = "Message is required.";
+            } else if (values.message.trim().length < 10) {
+                errors.message = "Message must be at least 10 characters.";
+            }
+
+            return errors;
+        },
+        onSubmit: () => {
+            setSubmitted(true);
+        },
+    });
 
     return (
         <section className="bg-white py-24 border-t border-grey-100">
@@ -142,7 +173,7 @@ function ContactSection() {
                                             type="button"
                                             onClick={() => {
                                                 setSubmitted(false);
-                                                setForm({ name: "", email: "", subject: "", message: "" });
+                                                formik.resetForm();
                                             }}
                                             className="mt-2 text-sm text-primary-blue hover:underline"
                                         >
@@ -150,29 +181,33 @@ function ContactSection() {
                                         </button>
                                     </div>
                                 ) : (
-                                    <form onSubmit={handleSubmit} className="grid gap-5">
+                                    <form onSubmit={formik.handleSubmit} className="grid gap-5" noValidate>
                                         {/* Name + Email row */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <div className="flex flex-col gap-4">
                                                 <Label htmlFor="name">Full Name</Label>
-                                                <Input id="name" name="name" type="text" placeholder="Your name" value={form.name} onChange={handleChange} required />
+                                                <Input id="name" name="name" type="text" placeholder="Your name" value={formik.values.name} onChange={formik.handleChange} onBlur={formik.handleBlur} aria-invalid={Boolean(formik.touched.name && formik.errors.name)} required />
+                                                {formik.touched.name && formik.errors.name ? <p className="text-sm text-red-600">{formik.errors.name}</p> : null}
                                             </div>
                                             <div className="flex flex-col gap-4">
                                                 <Label htmlFor="email">Email</Label>
-                                                <Input id="email" name="email" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} required />
+                                                <Input id="email" name="email" type="email" placeholder="you@example.com" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} aria-invalid={Boolean(formik.touched.email && formik.errors.email)} required />
+                                                {formik.touched.email && formik.errors.email ? <p className="text-sm text-red-600">{formik.errors.email}</p> : null}
                                             </div>
                                         </div>
 
                                         {/* Subject */}
                                         <div className="flex flex-col gap-4">
                                             <Label htmlFor="subject">Subject</Label>
-                                            <Input id="subject" name="subject" type="text" placeholder="What is this about?" value={form.subject} onChange={handleChange} required />
+                                            <Input id="subject" name="subject" type="text" placeholder="What is this about?" value={formik.values.subject} onChange={formik.handleChange} onBlur={formik.handleBlur} aria-invalid={Boolean(formik.touched.subject && formik.errors.subject)} required />
+                                            {formik.touched.subject && formik.errors.subject ? <p className="text-sm text-red-600">{formik.errors.subject}</p> : null}
                                         </div>
 
                                         {/* Message */}
                                         <div className="flex flex-col gap-4">
                                             <Label htmlFor="message">Message</Label>
-                                            <Textarea id="message" name="message" placeholder="Write your message here…" rows={5} value={form.message} onChange={handleChange} required />
+                                            <Textarea id="message" name="message" placeholder="Write your message here…" rows={5} value={formik.values.message} onChange={formik.handleChange} onBlur={formik.handleBlur} aria-invalid={Boolean(formik.touched.message && formik.errors.message)} required />
+                                            {formik.touched.message && formik.errors.message ? <p className="text-sm text-red-600">{formik.errors.message}</p> : null}
                                         </div>
 
                                         <Button type="submit" className="w-full bg-grey-1200 text-white hover:bg-grey-1000 rounded-lg h-10 font-semibold flex items-center justify-center gap-2">
