@@ -26,8 +26,11 @@ export function AboutSection() {
                 <HeroGridPattern className="absolute inset-0 w-full h-full" />
             </div>
 
+            {/* Mobile fallback background */}
+            <div className="pointer-events-none absolute inset-0 z-0 md:hidden bg-center bg-cover opacity-80" style={{ backgroundImage: "url('/img/gradient-blob.webp')" }} />
+
             {/* Layer 2: Gradient blobs — top-right area */}
-            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden hidden md:block">
                 <svg className="absolute top-0 right-0 h-full w-full lg:w-[85%]" viewBox="0 0 1221 655" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMaxYMin slice" style={{ maxWidth: "1221px" }}>
                     {/* Green blob */}
                     <g filter="url(#about-blur-green)">
@@ -63,7 +66,7 @@ export function AboutSection() {
 
             {/* Layer 3: Noise texture overlay */}
             <div
-                className="pointer-events-none absolute inset-0 z-1 opacity-[0.95] mix-blend-soft-light bg-black"
+                className="pointer-events-none absolute inset-0 z-1 opacity-[0.95] mix-blend-soft-light bg-black hidden md:block"
                 style={{
                     mask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",
                     WebkitMask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",

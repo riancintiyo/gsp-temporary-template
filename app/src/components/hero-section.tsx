@@ -7,12 +7,15 @@ import { FadeIn } from "@/components/ui/fade-in";
 
 export function HeroSection() {
     return (
-        <section className="relative min-h-screen w-full overflow-hidden bg-white pt-[var(--nav-height)]">
+        <section className="relative min-h-screen w-full overflow-hidden bg-white pt-(--nav-height)">
             {/* Layer 1 (bottom): Grid pattern — shifted right */}
             <HeroGridPattern className="pointer-events-none absolute inset-0 w-full h-full opacity-100" style={{ transform: "translateX(20%)" }} />
 
+            {/* Mobile fallback background */}
+            <div className="pointer-events-none absolute inset-0 z-0 md:hidden bg-center bg-cover opacity-80" style={{ backgroundImage: "url('/img/gradient-blob.webp')" }} />
+
             {/* Layer 2 (middle): Gradient blobs — green, blue, purple */}
-            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden hidden md:block">
                 <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 1024" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                     <g filter="url(#blur-green)" transform="translate(200, 00)">
                         <path d="M969.63 431.593C1018.41 628.973 1009.33 740 831.317 740C653.306 740 509 595.846 509 418.023C509 240.2 791.619 43 969.63 43C1136.96 142.924 969.63 253.77 969.63 431.593Z" fill="#95D2B3" />
@@ -45,7 +48,7 @@ export function HeroSection() {
 
             {/* Layer 3 (top): Noise texture overlay */}
             <div
-                className="pointer-events-none absolute inset-0 opacity-[0.95] mix-blend-soft-light bg-black"
+                className="pointer-events-none absolute inset-0 opacity-[0.95] mix-blend-soft-light bg-black hidden md:block"
                 style={{
                     mask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",
                     WebkitMask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",
@@ -53,14 +56,14 @@ export function HeroSection() {
             />
 
             {/* Content */}
-            <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col lg:flex-row items-center lg:items-stretch gap-12 lg:gap-16 px-8 lg:px-[var(--page-margin)] py-16 lg:py-24">
+            <div className="relative z-10 mx-auto flex w-full max-w-360 flex-col lg:flex-row items-center lg:items-stretch gap-12 lg:gap-16 px-8 lg:px-(--page-margin) py-16 lg:py-24">
                 {/* Left column — Text */}
                 <div className="flex flex-1 flex-col justify-center items-center md:items-start gap-8 lg:gap-10 py-8 lg:py-16">
-                    <TextAnimate as="h1" by="line" animation="fadeIn" duration={0.6} startOnView={false} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-[var(--palette-grey-1200)] text-center md:text-left" style={{ fontStyle: "normal" }}>
+                    <TextAnimate as="h1" by="line" animation="fadeIn" duration={0.6} startOnView={false} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-grey-1200 text-center md:text-left" style={{ fontStyle: "normal" }}>
                         {`General Science Program`}
                     </TextAnimate>
 
-                    <TextAnimate as="p" by="line" animation="fadeIn" duration={0.5} delay={0.2} startOnView={false} className="max-w-[520px] text-base sm:text-lg leading-7 text-[var(--palette-grey-800)] text-center md:text-left">
+                    <TextAnimate as="p" by="line" animation="fadeIn" duration={0.5} delay={0.2} startOnView={false} className="max-w-130 text-base sm:text-lg leading-7 text-grey-800 text-center md:text-left">
                         {`A STEAM science program empowering learning and creativity through Science, Technology, Engineering, Art, and Math projects for elementary students in rural areas.`}
                     </TextAnimate>
 
@@ -73,7 +76,7 @@ export function HeroSection() {
                 </div>
 
                 {/* Right column — Bento Grid */}
-                <FadeIn className="flex-1 w-full max-w-[580px]" delay={0.35} duration={0.55}>
+                <FadeIn className="flex-1 w-full max-w-145" delay={0.35} duration={0.55}>
                     <HeroBentoGrid />
                 </FadeIn>
             </div>

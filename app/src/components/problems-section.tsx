@@ -73,7 +73,7 @@ export function ProblemsSection() {
                         >
                             {/* Noise overlay */}
                             <div
-                                className="pointer-events-none absolute inset-0 opacity-[0.90] mix-blend-soft-light bg-white blur-xl"
+                                className="pointer-events-none absolute inset-0 opacity-[0.90] mix-blend-soft-light bg-white blur-xl hidden md:block"
                                 style={{
                                     mask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",
                                     WebkitMask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",
@@ -107,7 +107,7 @@ export function ProblemsSection() {
                         >
                             {/* Noise overlay */}
                             <div
-                                className="pointer-events-none absolute blur-in-3xl inset-0 opacity-[0.95] mix-blend-soft-light bg-white"
+                                className="pointer-events-none absolute blur-in-3xl inset-0 opacity-[0.95] mix-blend-soft-light bg-white hidden md:block"
                                 style={{
                                     mask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",
                                     WebkitMask: "repeating-radial-gradient(circle at center, #000, 0.0003px, #000, 0, #0000, 0.0006px, #0000 0)",

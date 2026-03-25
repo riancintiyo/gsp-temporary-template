@@ -22,17 +22,38 @@ export function RevealOnView({ children, className, delay = 0, duration = 0.72, 
     const ref = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [isTouchLike, setIsTouchLike] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+        const onChange = () => setIsTouchLike(mediaQuery.matches);
+
+        onChange();
+        mediaQuery.addEventListener("change", onChange);
+
+        return () => {
+            mediaQuery.removeEventListener("change", onChange);
+        };
+    }, []);
 
     useEffect(() => {
         const element = ref.current;
         if (!element) return;
 
-        const observerThreshold = followScroll ? Array.from({ length: 101 }, (_, index) => index / 100) : threshold;
+        if (isTouchLike) {
+            setIsVisible(true);
+            setProgress(1);
+            return;
+        }
+
+        const effectiveFollowScroll = followScroll && !isTouchLike;
+
+        const observerThreshold = effectiveFollowScroll ? Array.from({ length: 101 }, (_, index) => index / 100) : threshold;
 
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (followScroll) {
+                    if (effectiveFollowScroll) {
                         const normalizedProgress = Math.max(0, Math.min(1, entry.intersectionRatio / scrollEnd));
                         if (once) {
                             setProgress((prev) => Math.max(prev, normalizedProgress));
@@ -58,11 +79,12 @@ export function RevealOnView({ children, className, delay = 0, duration = 0.72, 
         observer.observe(element);
 
         return () => observer.disconnect();
-    }, [followScroll, once, rootMargin, scrollEnd, threshold]);
+    }, [followScroll, isTouchLike, once, rootMargin, scrollEnd, threshold]);
 
     const normalizedScaleFrom = Math.min(1, Math.max(0.7, scaleFrom));
     const normalizedBlurFrom = Math.max(0, blurFrom);
-    const effectiveProgress = followScroll ? progress : isVisible ? 1 : 0;
+    const effectiveFollowScroll = followScroll && !isTouchLike;
+    const effectiveProgress = effectiveFollowScroll ? progress : isVisible ? 1 : 0;
     const currentScale = normalizedScaleFrom + (1 - normalizedScaleFrom) * effectiveProgress;
     const currentY = y * (1 - effectiveProgress);
     const currentBlur = normalizedBlurFrom * (1 - effectiveProgress);
@@ -71,9 +93,7 @@ export function RevealOnView({ children, className, delay = 0, duration = 0.72, 
         opacity: effectiveProgress,
         transform: `translate3d(0, ${currentY}px, 0) scale(${currentScale})`,
         filter: currentBlur > 0 ? `blur(${currentBlur}px)` : "none",
-        transition: followScroll
-            ? `opacity ${duration}s linear, transform ${duration}s linear, filter ${duration}s linear`
-            : `opacity ${duration}s ease-out ${delay}s, transform ${duration}s ease-out ${delay}s, filter ${duration}s ease-out ${delay}s`,
+        transition: followScroll ? `opacity ${duration}s linear, transform ${duration}s linear, filter ${duration}s linear` : `opacity ${duration}s ease-out ${delay}s, transform ${duration}s ease-out ${delay}s, filter ${duration}s ease-out ${delay}s`,
         willChange: isVisible && effectiveProgress < 1 ? "opacity, transform, filter" : "auto",
     };
 
