@@ -109,7 +109,7 @@ function ImageCarousel() {
     };
 
     return (
-        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-grey-100">
+        <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden bg-grey-100">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={current}
@@ -228,35 +228,36 @@ function ProgramDetailsSection() {
 
 function ApplicationFormSection() {
     return (
-        <section id="apply" className="bg-grey-10 py-20 lg:py-28 scroll-mt-20">
-            <div className="mx-auto w-full max-w-7xl px-6 lg:px-16">
-                <RevealOnView>
-                    <div className="flex flex-col gap-4 mb-6 max-w-2xl">
-                        <p className="text-sm font-semibold uppercase tracking-widest text-primary-blue">Apply Now</p>
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-grey-1200">
-                            STEAM Volunteer Application
-                        </h2>
-                        <p className="text-base sm:text-lg leading-relaxed text-grey-800">
-                            This is an <strong>unpaid volunteer program</strong> driven by a mission to address education inequality. In Wonosobo, Kalidadap, students lost nearly two years of learning due to the COVID-19 pandemic. Many children in the area still have limited access to essential educational tools such as laptops and science equipment. This program was started to bridge that gap — to bring quality STEAM education directly to the students who need it most, and to remind them that their dreams are worth pursuing.
-                        </p>
-                    </div>
-                </RevealOnView>
+        <section id="apply" className="scroll-mt-20">
+            {/* Title area with padding */}
+            <div className="bg-grey-10 pt-20 lg:pt-28 pb-12">
+                <div className="mx-auto w-full px-6 lg:px-16">
+                    <RevealOnView>
+                        <div className="flex flex-col gap-4">
+                            <p className="text-sm font-semibold uppercase tracking-widest text-primary-blue">Apply Now</p>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-grey-1200">
+                                STEAM Volunteer Application
+                            </h2>
+                            <p className="text-base sm:text-lg leading-relaxed text-grey-800">
+                                This is an <strong>unpaid volunteer program</strong> driven by a mission to address education inequality. In Wonosobo, Kalidadap, students lost nearly two years of learning due to the COVID-19 pandemic. Many children in the area still have limited access to essential educational tools such as laptops and science equipment. This program was started to bridge that gap — to bring quality STEAM education directly to the students who need it most, and to remind them that their dreams are worth pursuing.
+                            </p>
+                        </div>
+                    </RevealOnView>
+                </div>
+            </div>
 
-                {/* Tally embed */}
-                <RevealOnView>
-                    <div className="w-full rounded-2xl overflow-hidden bg-white border border-grey-100 shadow-(--shadow-webflow-dropshadow)">
-                        <iframe
-                            data-tally-src="https://tally.so/r/NpLGyN?transparentBackground=1"
-                            width="100%"
-                            height="800"
-                            frameBorder="0"
-                            marginHeight={0}
-                            marginWidth={0}
-                            title="STEAM Volunteer Application Form"
-                            className="w-full"
-                        />
-                    </div>
-                </RevealOnView>
+            {/* Tally embed — full width, original dark background preserved */}
+            <div className="w-full">
+                <iframe
+                    data-tally-src="https://tally.so/r/NpLGyN"
+                    width="100%"
+                    height="800"
+                    frameBorder="0"
+                    marginHeight={0}
+                    marginWidth={0}
+                    title="STEAM Volunteer Application Form"
+                    className="w-full"
+                />
             </div>
         </section>
     );
