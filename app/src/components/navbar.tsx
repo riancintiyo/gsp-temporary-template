@@ -81,7 +81,7 @@ const NAV_LINKS = [
 
 const PROGRAM_MENU_ITEMS = [
     { href: "/join", label: "Voluntrip Program" },
-    { href: "/steam-volunteer", label: "STEAM Volunteer Application" },
+    { href: "#", label: "STEAM Volunteer Application" },
 ];
 
 export function Navbar() {
